@@ -1,0 +1,1866 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cybersecurity Awareness — Modern Dashboard</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================================
+       CYBERSECURITY AWARENESS DASHBOARD - TODO LIST & IMPLEMENTATION GUIDE
+       =====================================================================
+       
+       CONTENT & LEARNING:
+       1. [MODULES DATA] Actual lesson content with detailed text/examples
+       2. [QUIZZES DATA] Add quizzes for Updates, WiFi, Backup modules
+       3. [NEW SECTION] Interactive simulations (phishing analyzer, password tester) ✓ IMPLEMENTED
+       4. [MODULES DATA] Video embeds or tutorial links in sections
+       5. [MODULES DATA] Real-world case studies in module sections
+       6. [RESOURCES SECTION] Downloadable checklists functionality
+       
+       FUNCTIONALITY & FEATURES:
+       7. [RESOURCES RENDERING] Make resource links clickable external links ✓ IMPLEMENTED
+       8. [NEW SECTION] Certificate generation on 100% completion ✓ IMPLEMENTED
+       9. [HEADER] Search functionality across modules and resources
+       10. [MODULE CARDS] Bookmarking/favorites system
+       11. [MODAL] Notes section for each module
+       12. [NEW SECTION] Glossary of technical terms ✓ IMPLEMENTED
+       13. [PROGRESS SECTION] Reminder system for reviewing materials
+       
+       USER EXPERIENCE:
+       14. [BOOT FUNCTION] Onboarding tour for first-time users
+       15. [CSS MEDIA QUERIES] Better mobile responsiveness ✓ IMPLEMENTED
+       16. [EVENT LISTENERS] More keyboard shortcuts
+       17. [CSS] Print-friendly version styles
+       18. [SECTION SWITCHING] Loading states and transitions ✓ IMPLEMENTED
+       19. [RENDER FUNCTIONS] Better empty states
+       20. [CSS/HTML] Tooltips for features
+       
+       GAMIFICATION:
+       21. [NEW SECTION] Badges/achievements system ✓ IMPLEMENTED
+       22. [APP STATE] Streak tracking
+       23. [APP STATE] Points system
+       24. [NEW SECTION] Leaderboard (multi-user)
+       25. [NEW SECTION] Daily challenges
+       
+       DATA & ANALYTICS:
+       26. [APP STATE] Time tracking per module
+       27. [QUIZ RENDERING] Quiz retake functionality ✓ IMPLEMENTED
+       28. [PROGRESS SECTION] Performance analytics
+       29. [PROGRESS SECTION] Export progress as PDF ✓ IMPLEMENTED
+       30. [MODULES RENDERING] Module recommendations based on performance
+       
+       ACCESSIBILITY:
+       31. [HTML/ARIA] Better screen reader optimization ✓ IMPLEMENTED
+       32. [CSS] High contrast mode option
+       33. [CONTROLS] Font size adjustment controls
+       34. [EVENT LISTENERS] Enhanced keyboard navigation ✓ IMPLEMENTED
+       35. [HTML] More descriptive aria-labels ✓ IMPLEMENTED
+       
+       CONTENT MANAGEMENT:
+       36. [NEW SECTION] Admin mode for editing content
+       37. [BOOT FUNCTION] Import/export modules from JSON
+       38. [APP STATE] i18n support for multiple languages
+       39. [CSS VARIABLES] Custom branding/theming
+       40. [MODULES DATA] Module versioning with timestamps
+       
+       ADVANCED FEATURES:
+       41. [APP STATE] Spaced repetition algorithm
+       42. [QUIZ RENDERING] Adaptive learning based on performance
+       43. [NEW SECTION] Social features (multi-user)
+       44. [EXPORT] SCORM compliance for LMS integration
+       45. [REQUIRES BACKEND] Email notifications
+       46. [TOOLS SECTION] 2FA training simulator ✓ IMPLEMENTED
+       47. [TOOLS SECTION] Password manager demo ✓ IMPLEMENTED
+       48. [TOOLS SECTION] Phishing email simulator ✓ IMPLEMENTED
+       
+       POLISH & DETAILS:
+       49. [CSS] Enhanced animations and micro-interactions ✓ IMPLEMENTED
+       50. [OPTIONAL] Sound effects for actions
+       51. [PROGRESS SECTION] Confetti animation on completion ✓ IMPLEMENTED
+       52. [ERROR HANDLING] Better error handling throughout
+       53. [BOOT FUNCTION] Session recovery warning
+       54. [MODULES DATA] Module prerequisites system
+       55. [MODULE CARDS] Estimated completion time display ✓ IMPLEMENTED
+       56. [PROGRESS SECTION] Recently completed section
+       57. [DASHBOARD] Quick stats widget ✓ IMPLEMENTED
+       58. [MODULES DATA] Difficulty indicators ✓ IMPLEMENTED
+       59. [MODAL] Related resources suggestions
+       60. [NEW SECTION] Feedback mechanism for modules
+       
+       ===================================================================== */
+
+    /* Design tokens */
+    :root{
+      --bg-main: linear-gradient(135deg,#f3f6ff 0%, #eef2ff 100%);
+      --accent: #2563eb;
+      --accent-2: #60a5fa;
+      --muted: #6b7280;
+      --card-bg: rgba(255,255,255,0.55);
+      --glass-border: rgba(255,255,255,0.30);
+      --text: #0f172a;
+      --shadow: 0 10px 30px rgba(15,23,42,0.08);
+      --radius: 14px;
+      --glass-blur: 8px;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    [data-theme="dark"]{
+      --bg-main: linear-gradient(135deg,#071022 0%, #0b1220 100%);
+      --accent: #60a5fa;
+      --accent-2: #3b82f6;
+      --muted: #94a3b8;
+      --card-bg: rgba(6,10,18,0.64);
+      --glass-border: rgba(255,255,255,0.04);
+      --text: #e6eef8;
+      --shadow: 0 12px 40px rgba(2,6,23,0.6);
+      --success: #10b981;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    }
+
+    * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text); background:var(--bg-main); }
+    .page { max-width:1280px; margin: 32px auto; padding: 0 20px 120px; }
+
+    /* Header */
+    header.site {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom: 22px; flex-wrap: wrap;
+    }
+    .brand { display:flex; align-items:center; gap:14px; }
+    .logo {
+      width:56px; height:56px; border-radius:12px; display:grid; place-items:center;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:white; font-weight:700; font-family:Poppins, Inter; box-shadow:var(--shadow);
+    }
+    .title { line-height:1; }
+    .title h1 { margin:0; font-family:Poppins; font-weight:700; font-size:1.2rem; }
+    .title p { margin:0; color:var(--muted); font-size:0.9rem; }
+
+    /* Controls */
+    .controls { display:flex; gap:12px; align-items:center; flex-wrap: wrap; }
+    .btn {
+      border:0; padding:10px 14px; border-radius:999px; cursor:pointer; background:var(--accent);
+      color:white; font-weight:600; box-shadow: 0 6px 20px rgba(37,99,235,0.12);
+      transition: all 0.2s; font-size: 0.9rem;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.18); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .ghost {
+      background:transparent; border:1px solid var(--glass-border); color:var(--text);
+      padding:8px 12px; border-radius:10px; transition: all 0.2s; cursor: pointer;
+    }
+    .ghost:hover { background: rgba(0,0,0,0.03); }
+
+    /* Quick stats widget */
+    .stats-widget {
+      display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .stat-card {
+      flex: 1; min-width: 140px; background: var(--card-bg); padding: 14px 18px;
+      border-radius: 10px; border: 1px solid var(--glass-border); backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--shadow);
+    }
+    .stat-value {
+      font-size: 1.8rem; font-weight: 700; font-family: Poppins; margin: 0; color: var(--accent);
+    }
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin: 4px 0 0 0; }
+
+    /* Layout */
+    .layout { display:grid; grid-template-columns: 1fr; gap:18px; }
+    @media(min-width:980px){ .layout { grid-template-columns: 260px 1fr; align-items:start; } }
+
+    /* Sidebar */
+    nav.sidebar {
+      position:sticky; top:24px; align-self:start;
+      background:var(--card-bg); border-radius:12px; padding:16px; box-shadow:var(--shadow);
+      backdrop-filter: blur(var(--glass-blur)); border:1px solid var(--glass-border);
+    }
+    nav.sidebar ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+    nav.sidebar a { 
+      text-decoration:none; display:flex; gap:10px; align-items:center; padding:10px 12px; 
+      border-radius:10px; color:var(--text); font-weight:600; transition: all 0.2s; 
+    }
+    nav.sidebar a:hover { background: rgba(0,0,0,0.03); }
+    nav.sidebar a.active { background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; box-shadow: 0 8px 24px rgba(37,99,235,0.12); }
+
+    /* Main content */
+    .main-card {
+      background: var(--card-bg); padding:22px; border-radius:var(--radius);
+      box-shadow:var(--shadow); border:1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur)); min-height: 500px;
+    }
+
+    /* Modules grid */
+    .modules-grid {
+      display:grid; gap:16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    }
+    .module {
+      border-radius:12px; padding:18px; background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+      box-shadow: 0 8px 20px rgba(2,6,23,0.04);
+      border:1px solid var(--glass-border); position:relative; overflow:hidden;
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .module:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.08); }
+    .module .icon { 
+      width:46px; height:46px; border-radius:10px; display:grid; place-items:center; 
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:white; 
+      font-size:1.1rem; font-weight:700; flex-shrink: 0;
+    }
+    .module h3 { margin:0; font-size:1.05rem; font-weight:700; font-family:Poppins; }
+    .module p { margin:0; color:var(--muted); font-size:0.92rem; line-height: 1.4; }
+    .module .badge {
+      position: absolute; top: 12px; right: 12px; padding: 4px 8px;
+      border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+      background: var(--success); color: white;
+    }
+    .module .difficulty {
+      font-size: 0.8rem; padding: 3px 8px; border-radius: 6px;
+      background: rgba(0,0,0,0.05); display: inline-block; margin-top: 4px;
+    }
+    .module .time-estimate {
+      font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 4px;
+    }
+
+    /* Progress */
+    .progress-row { display:flex; align-items:center; gap:12px; margin-top:auto; }
+    .progress-bar { flex:1; height:10px; background:rgba(0,0,0,0.06); border-radius:99px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); transition: width .6s ease; }
+    .progress-text { font-size:0.85rem; color:var(--muted); min-width:56px; text-align:right; font-weight: 600; }
+
+    /* Skeleton */
+    .skeleton { background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.10), rgba(255,255,255,0.04)); background-size:200% 100%; animation: shimmer 1.2s linear infinite; border-radius:8px; }
+    @keyframes shimmer{ from{ background-position:200% 0 } to { background-position:-200% 0 } }
+
+    /* Modal */
+    .modal {
+      position:fixed; inset:0; display:none; z-index:2000; align-items:center; justify-content:center; padding:24px;
+      background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.45)); backdrop-filter: blur(4px);
+    }
+    .modal[aria-hidden="false"]{ display:flex; animation: fadeIn 0.2s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .dialog {
+      background:var(--card-bg); border-radius:12px; padding:22px; width:100%; max-width:880px; 
+      max-height:85vh; overflow-y:auto; box-shadow:var(--shadow); border:1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur)); animation: slideUp 0.3s cubic-bezier(.2,.9,.2,1);
+    }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .dialog .close { float:right; background:transparent; border:0; font-size:20px; color:var(--muted); cursor:pointer; padding: 4px 8px; }
+    .dialog .close:hover { color: var(--text); }
+
+    /* Quiz styles */
+    .quiz-container { margin-top: 18px; }
+    .quiz-question { background: var(--card-bg); padding: 18px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--glass-border); }
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .quiz-option { 
+      padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border); cursor: pointer; 
+      transition: all 0.2s; background: rgba(255,255,255,0.02); 
+    }
+    .quiz-option:hover:not(.correct):not(.incorrect) { background: rgba(37,99,235,0.08); border-color: var(--accent); transform: translateX(4px); }
+    .quiz-option.correct { background: rgba(34,197,94,0.1); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239,68,68,0.1); border-color: var(--danger); }
+    .quiz-result { margin-top: 12px; padding: 12px; border-radius: 8px; font-weight: 600; }
+    .quiz-result.correct { background: rgba(34,197,94,0.1); color: var(--success); }
+    .quiz-result.incorrect { background: rgba(239,68,68,0.1); color: var(--danger); }
+    .quiz-score {
+      background: var(--card-bg); padding: 16px; border-radius: 12px; margin-bottom: 16px;
+      border: 1px solid var(--glass-border); text-align: center;
+    }
+
+    /* Tools/Simulators */
+    .tool-card {
+      background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 16px;
+      border: 1px solid var(--glass-border); box-shadow: var(--shadow);
+    }
+    .tool-input {
+      width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.02); color: var(--text); font-size: 1rem;
+      margin: 8px 0;
+    }
+    .tool-output {
+      padding: 14px; border-radius: 8px; margin-top: 12px; border: 1px solid var(--glass-border);
+    }
+    .strength-weak { background: rgba(239,68,68,0.1); border-color: var(--danger); color: var(--danger); }
+    .strength-medium { background: rgba(245,158,11,0.1); border-color: var(--warning); color: var(--warning); }
+    .strength-strong { background: rgba(34,197,94,0.1); border-color: var(--success); color: var(--success); }
+    
+    .phishing-email {
+      background: rgba(255,255,255,0.02); padding: 16px; border-radius: 8px; 
+      border: 1px solid var(--glass-border); margin: 12px 0;
+      font-family: monospace; font-size: 0.9rem;
+    }
+    .phishing-email.revealed { border-color: var(--danger); border-width: 2px; }
+    .red-flag {
+      background: rgba(239,68,68,0.15); padding: 2px 6px; border-radius: 4px;
+      cursor: help; display: inline-block;
+    }
+
+    /* Resource cards */
+    .resource-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+      border: 1px solid var(--glass-border); border-radius: 12px; padding: 16px;
+      margin-bottom: 12px; transition: all 0.2s;
+    }
+    .resource-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(2,6,23,0.06); }
+    .resource-link {
+      color: var(--accent); text-decoration: none; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .resource-link:hover { text-decoration: underline; color: var(--accent-2); }
+
+    /* Badges/Achievements */
+    .badges-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;
+      margin-top: 16px;
+    }
+    .badge-item {
+      padding: 16px; border-radius: 10px; text-align: center;
+      border: 1px solid var(--glass-border); background: var(--card-bg);
+      transition: all 0.2s;
+    }
+    .badge-item.earned { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(96,165,250,0.1)); }
+    .badge-item.locked { opacity: 0.5; }
+    .badge-icon {
+      font-size: 2rem; margin-bottom: 8px; display: block;
+    }
+    .badge-name { font-size: 0.85rem; font-weight: 600; }
+
+    /* Glossary */
+    .glossary-term {
+      background: var(--card-bg); padding: 14px; border-radius: 10px;
+      border: 1px solid var(--glass-border); margin-bottom: 10px;
+    }
+    .glossary-term dt {
+      font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;
+      color: var(--accent);
+    }
+    .glossary-term dd {
+      margin: 0; color: var(--muted); line-height: 1.5;
+    }
+
+    /* Certificate */
+    .certificate {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border: 8px solid var(--accent); border-radius: 12px; padding: 40px;
+      text-align: center; max-width: 600px; margin: 20px auto;
+      box-shadow: 0 20px 60px rgba(2,6,23,0.15);
+      color: #0f172a;
+    }
+    [data-theme="dark"] .certificate {
+      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
+      color: #e6eef8;
+    }
+    .certificate h2 { font-size: 2rem; margin: 0 0 12px 0; font-family: Poppins; }
+    .certificate .cert-text { font-size: 1.1rem; margin: 12px 0; }
+    .certificate .cert-name { 
+      font-size: 1.8rem; font-weight: 700; color: var(--accent); 
+      margin: 20px 0; font-family: Poppins; 
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed; width: 10px; height: 10px; background: var(--accent);
+      pointer-events: none; z-index: 3000; animation: confettiFall 3s linear;
+    }
+    @keyframes confettiFall {
+      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Utility */
+    .row { display:flex; gap:12px; align-items:center; }
+    .muted { color:var(--muted); font-size:0.9rem; }
+    .section-content { display: none; }
+    .section-content.active { display: block; animation: fadeIn 0.3s; }
+    footer { margin-top:18px; text-align:center; color:var(--muted); font-size:0.9rem; }
+
+    /* Animations */
+    .module { opacity:0; transform: translateY(10px); }
+    .module.in-view { opacity:1; transform:none; transition: opacity .55s ease, transform .55s cubic-bezier(.2,.9,.2,1); }
+
+    /* Loading spinner */
+    .spinner {
+      border: 3px solid var(--glass-border);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%; width: 40px; height: 40px;
+      animation: spin 0.8s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Mobile responsiveness */
+    @media(max-width:640px){
+      .brand .logo { width:46px; height:46px; }
+      .title h1 { font-size:1rem; }
+      .title p { font-size: 0.8rem; }
+      .stats-widget { flex-direction: column; }
+      .stat-card { min-width: 100%; }
+      .modules-grid { grid-template-columns: 1fr; }
+      .controls { width: 100%; }
+      .btn, .ghost { flex: 1; text-align: center; }
+      nav.sidebar { position: relative; top: 0; }
+      .dialog { padding: 16px; max-height: 90vh; }
+    }
+
+    /* Print styles */
+    @media print {
+      .controls, nav.sidebar, .btn, .ghost, footer { display: none; }
+      .page { max-width: 100%; padding: 0; }
+      .main-card { box-shadow: none; border: 1px solid #ddd; }
+      .module { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page" id="app">
+    <header class="site" role="banner" aria-label="Dashboard header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🛡️</div>
+        <div class="title">
+          <h1>Cybersecurity Awareness</h1>
+          <p class="muted">Concise learning. Real impact.</p>
+        </div>
+      </div>
+
+      <div class="controls" role="navigation" aria-label="Primary controls">
+        <button id="themeToggle" class="btn" title="Toggle theme" aria-label="Toggle dark/light theme">Toggle theme</button>
+        <button id="downloadCert" class="ghost" title="Download Certificate" style="display:none;" aria-label="Download completion certificate">📜 Certificate</button>
+        <button id="exportProgress" class="ghost" title="Export Progress" aria-label="Export progress as PDF">💾 Export</button>
+        <button id="refreshBtn" class="ghost" title="Reset progress" aria-label="Reset all progress">🔄 Reset</button>
+      </div>
+    </header>
+
+    <!-- Quick Stats Widget -->
+    <div class="stats-widget" id="statsWidget">
+      <!-- Populated by JS -->
+    </div>
+
+    <main class="layout" role="main">
+      <!-- Sidebar nav -->
+      <nav class="sidebar" aria-label="Sections" id="sidebarNav">
+        <ul>
+          <li><a href="#modules" class="active" data-section="modules">📚 Modules</a></li>
+          <li><a href="#quizzes" data-section="quizzes">✅ Quizzes</a></li>
+          <li><a href="#tools" data-section="tools">🔧 Tools</a></li>
+          <li><a href="#glossary" data-section="glossary">📖 Glossary</a></li>
+          <li><a href="#resources" data-section="resources">🔗 Resources</a></li>
+          <li><a href="#achievements" data-section="achievements">🏆 Achievements</a></li>
+          <li><a href="#progress" data-section="progress">📊 Progress</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main content -->
+      <div class="main-card">
+        <!-- Modules Section -->
+        <section id="modulesSection" class="section-content active" aria-labelledby="modulesHeading">
+          <h2 id="modulesHeading">Learning Modules</h2>
+          <p class="muted" style="margin-top:6px;">Complete short modules to strengthen security habits.</p>
+          <div id="modulesArea" style="margin-top:18px;">
+            <div id="modulesGrid" class="modules-grid" aria-live="polite" aria-busy="false"></div>
+          </div>
+        </section>
+
+        <!-- Quizzes Section -->
+        <section id="quizzesSection" class="section-content" aria-labelledby="quizzesHeading">
+          <h2 id="quizzesHeading">Interactive Quizzes</h2>
+          <p class="muted" style="margin-top:6px;">Test your cybersecurity knowledge.</p>
+          <div id="quizContainer" class="quiz-container"></div>
+        </section>
+
+        <!-- Tools Section (NEW) -->
+        <section id="toolsSection" class="section-content" aria-labelledby="toolsHeading">
+          <h2 id="toolsHeading">Security Tools & Simulators</h2>
+          <p class="muted" style="margin-top:6px;">Practice with interactive security tools.</p>
+          <div id="toolsContainer" style="margin-top:18px;"></div>
+        </section>
+
+        <!-- Glossary Section (NEW) -->
+        <section id="glossarySection" class="section-content" aria-labelledby="glossaryHeading">
+          <h2 id="glossaryHeading">Cybersecurity Glossary</h2>
+          <p class="muted" style="margin-top:6px;">Essential security terminology explained.</p>
+          <div id="glossaryContainer" style="margin-top:18px;"></div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resourcesSection" class="section-content" aria-labelledby="resourcesHeading">
+          <h2 id="resourcesHeading">Security Resources</h2>
+          <p class="muted" style="margin-top:6px;">Essential tools and guides for staying secure online.</p>
+          <div id="resourcesContainer" style="margin-top:18px;"></div>
+        </section>
+
+        <!-- Achievements Section (NEW) -->
+        <section id="achievementsSection" class="section-content" aria-labelledby="achievementsHeading">
+          <h2 id="achievementsHeading">Achievements & Badges</h2>
+          <p class="muted" style="margin-top:6px;">Earn badges as you progress through your learning journey.</p>
+          <div id="achievementsContainer" style="margin-top:18px;"></div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progressSection" class="section-content" aria-labelledby="progressHeading">
+          <h2 id="progressHeading">Your Progress</h2>
+          <p class="muted" style="margin-top:6px;">Track your cybersecurity learning journey.</p>
+          <div id="progressContainer" style="margin-top:18px;"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer>© 2025 Cybersecurity Awareness • Built with care</footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="dialog" role="document">
+      <button class="close" aria-label="Close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    /************************************************************************
+     * Utilities
+     ************************************************************************/
+    const $ = sel => document.querySelector(sel);
+    const qs = sel => Array.from(document.querySelectorAll(sel));
+
+    // In-memory storage
+    const appState = {
+      theme: 'light',
+      progress: {},
+      quizAnswers: {},
+      badges: [],
+      startTime: Date.now()
+    };
+
+    /************************************************************************
+     * Module Data with difficulty and time estimates
+     ************************************************************************/
+    const MODULES = [
+      {
+        id: "password",
+        icon: "lock",
+        title: "Password Security",
+        description: "Create strong, unique passwords and use password managers effectively.",
+        difficulty: "Beginner",
+        estimatedTime: "15 min",
+        progress: { completed: 0, total: 5 },
+        sections: [
+          {
+            type: "introduction",
+            title: "Why Passwords Matter",
+            objectives: [
+              "Understand how passwords protect your digital life",
+              "Learn about common password vulnerabilities",
+              "Recognize the cost of password breaches"
+            ],
+            time: "5 min"
+          },
+          {
+            type: "lesson",
+            title: "Creating Strong Passwords",
+            objectives: [
+              "Use at least 12 characters with mixed case, numbers, and symbols",
+              "Avoid dictionary words and personal information",
+              "Create unique passwords for each account"
+            ],
+            time: "8 min"
+          },
+          {
+            type: "tool",
+            title: "Password Managers",
+            objectives: [
+              "Understand how password managers work",
+              "Learn to choose a reputable password manager",
+              "Set up your first password vault"
+            ],
+            time: "10 min"
+          }
+        ]
+      },
+      {
+        id: "2fa",
+        icon: "shield",
+        title: "Two-Factor Authentication",
+        description: "Add an extra layer of security to your accounts with 2FA.",
+        difficulty: "Beginner",
+        estimatedTime: "12 min",
+        progress: { completed: 0, total: 4 },
+        sections: [
+          {
+            type: "introduction",
+            title: "What is 2FA?",
+            objectives: [
+              "Learn how two-factor authentication works",
+              "Understand different types of 2FA",
+              "Know when to use 2FA"
+            ],
+            time: "6 min"
+          },
+          {
+            type: "lesson",
+            title: "Setting Up 2FA",
+            objectives: [
+              "Enable 2FA on critical accounts",
+              "Use authenticator apps instead of SMS",
+              "Save backup codes securely"
+            ],
+            time: "12 min"
+          }
+        ]
+      },
+      {
+        id: "phishing",
+        icon: "phish",
+        title: "Phishing Awareness",
+        description: "Identify and avoid phishing attacks and suspicious communications.",
+        difficulty: "Intermediate",
+        estimatedTime: "18 min",
+        progress: { completed: 0, total: 4 },
+        sections: [
+          {
+            type: "introduction",
+            title: "Understanding Phishing",
+            objectives: [
+              "Recognize common phishing tactics",
+              "Identify red flags in emails and messages",
+              "Understand the impact of phishing attacks"
+            ],
+            time: "7 min"
+          },
+          {
+            type: "practice",
+            title: "Spotting Phishing",
+            objectives: [
+              "Check sender addresses carefully",
+              "Verify links before clicking",
+              "Look for urgency and pressure tactics"
+            ],
+            time: "10 min"
+          }
+        ]
+      },
+      {
+        id: "updates",
+        icon: "refresh",
+        title: "Software Updates",
+        description: "Keep your systems secure with timely updates and patches.",
+        difficulty: "Beginner",
+        estimatedTime: "10 min",
+        progress: { completed: 0, total: 3 },
+        sections: [
+          {
+            type: "lesson",
+            title: "Why Updates Matter",
+            objectives: [
+              "Understand security vulnerabilities",
+              "Learn about zero-day exploits",
+              "Enable automatic updates"
+            ],
+            time: "8 min"
+          }
+        ]
+      },
+      {
+        id: "wifi",
+        icon: "wifi",
+        title: "WiFi Security",
+        description: "Protect yourself on public and home wireless networks.",
+        difficulty: "Intermediate",
+        estimatedTime: "14 min",
+        progress: { completed: 0, total: 3 },
+        sections: [
+          {
+            type: "lesson",
+            title: "Secure WiFi Practices",
+            objectives: [
+              "Use VPNs on public networks",
+              "Secure your home router",
+              "Avoid sensitive transactions on public WiFi"
+            ],
+            time: "9 min"
+          }
+        ]
+      },
+      {
+        id: "backup",
+        icon: "save",
+        title: "Data Backup",
+        description: "Protect your data with regular backups and recovery plans.",
+        difficulty: "Intermediate",
+        estimatedTime: "12 min",
+        progress: { completed: 0, total: 3 },
+        sections: [
+          {
+            type: "lesson",
+            title: "Backup Strategies",
+            objectives: [
+              "Follow the 3-2-1 backup rule",
+              "Choose cloud and local backup solutions",
+              "Test your backups regularly"
+            ],
+            time: "10 min"
+          }
+        ]
+      }
+    ];
+
+    /************************************************************************
+     * Quiz Data - Expanded
+     ************************************************************************/
+    const QUIZZES = [
+      {
+        id: "password-quiz",
+        title: "Password Security Quiz",
+        questions: [
+          {
+            question: "What is the minimum recommended length for a strong password?",
+            options: ["6 characters", "8 characters", "12 characters", "20 characters"],
+            correct: 2,
+            explanation: "Passwords should be at least 12 characters long to provide adequate security against brute force attacks."
+          },
+          {
+            question: "Which is the most secure type of two-factor authentication?",
+            options: ["SMS codes", "Email codes", "Authenticator app", "Security questions"],
+            correct: 2,
+            explanation: "Authenticator apps are more secure than SMS because they can't be intercepted and work offline."
+          },
+          {
+            question: "What should you do if you receive a suspicious email asking you to verify your account?",
+            options: [
+              "Click the link to verify",
+              "Reply with your information",
+              "Delete it and contact the company directly",
+              "Forward it to friends"
+            ],
+            correct: 2,
+            explanation: "Never click suspicious links. Instead, delete the email and contact the company through official channels to verify."
+          }
+        ]
+      },
+      {
+        id: "phishing-quiz",
+        title: "Phishing Detection Challenge",
+        questions: [
+          {
+            question: "Which is a common sign of a phishing email?",
+            options: [
+              "Professional formatting",
+              "Urgent language demanding immediate action",
+              "Company logo",
+              "Proper grammar"
+            ],
+            correct: 1,
+            explanation: "Phishing emails often create a false sense of urgency to pressure victims into acting without thinking."
+          },
+          {
+            question: "Before clicking a link, you should:",
+            options: [
+              "Just click it",
+              "Check if it looks legitimate",
+              "Hover over it to see the actual URL",
+              "Trust the sender"
+            ],
+            correct: 2,
+            explanation: "Always hover over links to see where they actually point before clicking. Phishers often disguise malicious URLs."
+          }
+        ]
+      },
+      {
+        id: "updates-quiz",
+        title: "Software Updates Quiz",
+        questions: [
+          {
+            question: "Why are software updates important for security?",
+            options: [
+              "They make software faster",
+              "They patch known vulnerabilities",
+              "They add new features",
+              "They're optional"
+            ],
+            correct: 1,
+            explanation: "Updates patch security vulnerabilities that hackers could exploit. Keeping software updated is critical."
+          },
+          {
+            question: "What is a zero-day exploit?",
+            options: [
+              "An exploit that takes zero days to fix",
+              "An attack on day zero of software release",
+              "A vulnerability unknown to the software maker",
+              "A free exploit tool"
+            ],
+            correct: 2,
+            explanation: "Zero-day exploits target vulnerabilities that are unknown to the software vendor, making them especially dangerous."
+          }
+        ]
+      },
+      {
+        id: "wifi-quiz",
+        title: "WiFi Security Quiz",
+        questions: [
+          {
+            question: "What should you use when connecting to public WiFi?",
+            options: ["Nothing special", "A VPN", "Incognito mode", "A proxy"],
+            correct: 1,
+            explanation: "A VPN encrypts your traffic, protecting your data even on unsecured public networks."
+          },
+          {
+            question: "Which WiFi security protocol is most secure?",
+            options: ["WEP", "WPA", "WPA2", "WPA3"],
+            correct: 3,
+            explanation: "WPA3 is the latest and most secure WiFi encryption standard, offering improved protection over WPA2."
+          }
+        ]
+      },
+      {
+        id: "backup-quiz",
+        title: "Data Backup Quiz",
+        questions: [
+          {
+            question: "What is the 3-2-1 backup rule?",
+            options: [
+              "3 backups, 2 locations, 1 cloud",
+              "3 copies, 2 different media, 1 offsite",
+              "3 drives, 2 computers, 1 server",
+              "3 days, 2 weeks, 1 month"
+            ],
+            correct: 1,
+            explanation: "The 3-2-1 rule means 3 copies of data, on 2 different media types, with 1 copy stored offsite."
+          },
+          {
+            question: "How often should you test your backups?",
+            options: ["Never", "Once a year", "Regularly", "Only when you need them"],
+            correct: 2,
+            explanation: "Regular testing ensures your backups actually work when you need them. Untested backups may be corrupted."
+          }
+        ]
+      }
+    ];
+
+    /************************************************************************
+     * Resources Data with clickable links
+     ************************************************************************/
+    const RESOURCES = [
+      {
+        title: "Password Managers",
+        description: "Industry-leading password managers to secure your accounts",
+        links: [
+          { name: "1Password", desc: "User-friendly with family sharing options", url: "https://1password.com" },
+          { name: "Bitwarden", desc: "Open-source and affordable", url: "https://bitwarden.com" },
+          { name: "LastPass", desc: "Free tier with premium features", url: "https://www.lastpass.com" }
+        ]
+      },
+      {
+        title: "Security Checking Tools",
+        description: "Check if your accounts have been compromised",
+        links: [
+          { name: "Have I Been Pwned", desc: "Check if your email appears in known data breaches", url: "https://haveibeenpwned.com" },
+          { name: "Password Strength Checker", desc: "Test how strong your passwords are", url: "https://www.security.org/how-secure-is-my-password/" }
+        ]
+      },
+      {
+        title: "Official Guidelines",
+        description: "Government and industry security frameworks",
+        links: [
+          { name: "NIST Cybersecurity Framework", desc: "Comprehensive security standards", url: "https://www.nist.gov/cyberframework" },
+          { name: "CISA Security Tips", desc: "US government security guidance", url: "https://www.cisa.gov/topics/cybersecurity-best-practices" },
+          { name: "Stay Safe Online", desc: "National cybersecurity awareness resources", url: "https://staysafeonline.org" }
+        ]
+      },
+      {
+        title: "Learning Resources",
+        description: "Expand your cybersecurity knowledge",
+        links: [
+          { name: "Cybrary", desc: "Free cybersecurity training courses", url: "https://www.cybrary.it" },
+          { name: "SANS Security Training", desc: "Professional security education", url: "https://www.sans.org" },
+          { name: "Google Safety Center", desc: "Practical online safety tips", url: "https://safety.google" }
+        ]
+      },
+      {
+        title: "Two-Factor Authentication Apps",
+        description: "Recommended authenticator applications",
+        links: [
+          { name: "Google Authenticator", desc: "Simple and reliable 2FA app", url: "https://support.google.com/accounts/answer/1066447" },
+          { name: "Authy", desc: "Multi-device 2FA with cloud backup", url: "https://authy.com" },
+          { name: "Microsoft Authenticator", desc: "Integrated with Microsoft services", url: "https://www.microsoft.com/en-us/security/mobile-authenticator-app" }
+        ]
+      }
+    ];
+
+    /************************************************************************
+     * Glossary Data
+     ************************************************************************/
+    const GLOSSARY = [
+      { term: "Two-Factor Authentication (2FA)", definition: "A security process that requires two different authentication factors to verify a user's identity, such as a password plus a code from your phone." },
+      { term: "Phishing", definition: "A cyber attack that uses disguised emails, messages, or websites to trick people into providing sensitive information like passwords or credit card numbers." },
+      { term: "Malware", definition: "Malicious software designed to harm, exploit, or otherwise compromise a computer system. Includes viruses, trojans, ransomware, and spyware." },
+      { term: "VPN (Virtual Private Network)", definition: "A service that encrypts your internet connection and routes it through a server in another location, protecting your privacy and security online." },
+      { term: "Encryption", definition: "The process of converting information into a coded format that can only be read by someone with the correct decryption key." },
+      { term: "Zero-Day Exploit", definition: "A cyber attack that targets a software vulnerability that is unknown to the software vendor, giving them 'zero days' to fix it." },
+      { term: "Password Manager", definition: "A software application that stores and manages passwords in an encrypted database, allowing you to use unique, strong passwords for every account." },
+      { term: "Social Engineering", definition: "Psychological manipulation techniques used to trick people into revealing confidential information or performing actions that compromise security." },
+      { term: "Ransomware", definition: "A type of malware that encrypts a victim's files and demands payment (ransom) in exchange for the decryption key." },
+      { term: "Firewall", definition: "A network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules." },
+      { term: "Authentication", definition: "The process of verifying the identity of a user, device, or system before granting access to resources." },
+      { term: "Brute Force Attack", definition: "A trial-and-error method used to decode encrypted data by systematically trying all possible combinations until the correct one is found." },
+      { term: "SSL/TLS", definition: "Security protocols that encrypt data transmitted between a web browser and a server, indicated by 'https://' in URLs." },
+      { term: "Patch", definition: "A software update that fixes security vulnerabilities, bugs, or adds minor improvements to a program." },
+      { term: "Multi-Factor Authentication (MFA)", definition: "Similar to 2FA but can require more than two authentication factors, providing even stronger security." }
+    ];
+
+    /************************************************************************
+     * Achievements/Badges Data
+     ************************************************************************/
+    const ACHIEVEMENTS = [
+      { id: "first-module", icon: "🎯", name: "First Steps", description: "Complete your first module", condition: () => Object.keys(appState.progress).length > 0 },
+      { id: "half-modules", icon: "📚", name: "Halfway There", description: "Complete 50% of modules", condition: () => {
+        const completed = MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length;
+        return completed >= Math.ceil(MODULES.length / 2);
+      }},
+      { id: "all-modules", icon: "🏆", name: "Module Master", description: "Complete all modules", condition: () => {
+        const completed = MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length;
+        return completed === MODULES.length;
+      }},
+      { id: "first-quiz", icon: "✅", name: "Quiz Novice", description: "Take your first quiz", condition: () => Object.keys(appState.quizAnswers).length > 0 },
+      { id: "perfect-quiz", icon: "💯", name: "Perfect Score", description: "Get 100% on any quiz", condition: () => {
+        return QUIZZES.some(quiz => {
+          const allCorrect = quiz.questions.every((q, idx) => {
+            const key = `${quiz.id}-${idx}`;
+            return appState.quizAnswers[key] === q.correct;
+          });
+          const allAnswered = quiz.questions.every((q, idx) => {
+            const key = `${quiz.id}-${idx}`;
+            return appState.quizAnswers[key] !== undefined;
+          });
+          return allCorrect && allAnswered;
+        });
+      }},
+      { id: "all-quizzes", icon: "🎓", name: "Quiz Champion", description: "Complete all quizzes", condition: () => {
+        let totalQuestions = 0;
+        let answeredQuestions = 0;
+        QUIZZES.forEach(quiz => {
+          quiz.questions.forEach((q, idx) => {
+            totalQuestions++;
+            if (appState.quizAnswers[`${quiz.id}-${idx}`] !== undefined) answeredQuestions++;
+          });
+        });
+        return answeredQuestions === totalQuestions && totalQuestions > 0;
+      }},
+      { id: "security-expert", icon: "🛡️", name: "Security Expert", description: "Complete everything", condition: () => {
+        const modulesComplete = MODULES.every(m => (appState.progress[m.id] || 0) >= m.progress.total);
+        let totalQ = 0, answeredQ = 0;
+        QUIZZES.forEach(quiz => {
+          quiz.questions.forEach((q, idx) => {
+            totalQ++;
+            if (appState.quizAnswers[`${quiz.id}-${idx}`] !== undefined) answeredQ++;
+          });
+        });
+        return modulesComplete && answeredQ === totalQ;
+      }}
+    ];
+
+    /************************************************************************
+     * Icons
+     ************************************************************************/
+    function getIcon(name) {
+      const icons = {
+        lock: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="10" width="18" height="11" rx="2" stroke="white" stroke-width="1.6"/><path d="M7 10V7a5 5 0 0 1 10 0v3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        shield: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l7 3v5c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-3z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        phish: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12c4 0 8-4 12-4s8 4 8 4-4 4-8 4S7 12 3 12z" stroke="white" stroke-width="1.6"/><path d="M14 9l3 3-3 3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        refresh: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M21 3v5h-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        wifi: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        save: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="white" stroke-width="1.6"/><path d="M17 21v-8H7v8M7 3v5h8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+      };
+      return icons[name] || `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.6"/></svg>`;
+    }
+
+    /************************************************************************
+     * Theme
+     ************************************************************************/
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+      appState.theme = theme;
+      $('#themeToggle').textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    (function initTheme() {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(prefersDark ? 'dark' : 'light');
+    })();
+
+    $('#themeToggle').addEventListener('click', () => {
+      applyTheme(appState.theme === 'dark' ? 'light' : 'dark');
+    });
+
+    /************************************************************************
+     * Utility Functions
+     ************************************************************************/
+    function percent(completed, total) {
+      return Math.round((completed / Math.max(total, 1)) * 100);
+    }
+
+    function escapeHtml(s = '') {
+      return s.replace?.(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) || s;
+    }
+
+    function checkAchievements() {
+      const newBadges = [];
+      ACHIEVEMENTS.forEach(ach => {
+        if (!appState.badges.includes(ach.id) && ach.condition()) {
+          appState.badges.push(ach.id);
+          newBadges.push(ach);
+        }
+      });
+      if (newBadges.length > 0) {
+        showBadgeNotification(newBadges);
+      }
+    }
+
+    function showBadgeNotification(badges) {
+      badges.forEach((badge, idx) => {
+        setTimeout(() => {
+          const notif = document.createElement('div');
+          notif.style.cssText = 'position:fixed;top:80px;right:20px;background:var(--card-bg);padding:16px 20px;border-radius:10px;box-shadow:var(--shadow);border:1px solid var(--glass-border);z-index:1000;animation:slideInRight 0.3s;backdrop-filter:blur(8px);';
+          notif.innerHTML = `<strong style="display:block;margin-bottom:4px;">${badge.icon} ${escapeHtml(badge.name)}</strong><span class="muted">${escapeHtml(badge.description)}</span>`;
+          document.body.appendChild(notif);
+          setTimeout(() => {
+            notif.style.animation = 'slideOutRight 0.3s';
+            setTimeout(() => notif.remove(), 300);
+          }, 3000);
+        }, idx * 500);
+      });
+    }
+
+    /************************************************************************
+     * Quick Stats Widget
+     ************************************************************************/
+    function updateStatsWidget() {
+      const completedModules = MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length;
+      let quizzesCorrect = 0, totalQuestions = 0;
+      QUIZZES.forEach(quiz => {
+        quiz.questions.forEach((q, idx) => {
+          totalQuestions++;
+          if (appState.quizAnswers[`${quiz.id}-${idx}`] === q.correct) quizzesCorrect++;
+        });
+      });
+      
+      $('#statsWidget').innerHTML = `
+        <div class="stat-card">
+          <p class="stat-value">${completedModules}/${MODULES.length}</p>
+          <p class="stat-label">Modules Complete</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-value">${quizzesCorrect}/${totalQuestions}</p>
+          <p class="stat-label">Quiz Correct</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-value">${appState.badges.length}/${ACHIEVEMENTS.length}</p>
+          <p class="stat-label">Badges Earned</p>
+        </div>
+      `;
+    }
+
+    /************************************************************************
+     * Module Rendering
+     ************************************************************************/
+    function markModuleCompleted(id) {
+      const mod = MODULES.find(m => m.id === id);
+      if (!mod) return;
+      appState.progress[id] = mod.progress.total;
+      renderModules();
+      updateStatsWidget();
+      updateProgressView();
+      checkAchievements();
+      checkCertificate();
+    }
+
+    function renderModules() {
+      const grid = $('#modulesGrid');
+      grid.innerHTML = '';
+      
+      MODULES.forEach(mod => {
+        const prog = appState.progress[mod.id] || 0;
+        const total = mod.progress.total;
+        const p = percent(prog, total);
+        const isComplete = prog >= total;
+        
+        const card = document.createElement('article');
+        card.className = 'module';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'article');
+        card.setAttribute('aria-label', `${mod.title} module, ${p}% complete`);
+        
+        card.innerHTML = `
+          ${isComplete ? '<span class="badge" aria-label="Completed">✓</span>' : ''}
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div class="icon" aria-hidden="true">${getIcon(mod.icon)}</div>
+            <div style="flex:1;">
+              <h3>${escapeHtml(mod.title)}</h3>
+              <p>${escapeHtml(mod.description)}</p>
+              <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap;">
+                <span class="difficulty">${escapeHtml(mod.difficulty)}</span>
+                <span class="time-estimate" aria-label="Estimated time ${mod.estimatedTime}">
+                  ⏱️ ${escapeHtml(mod.estimatedTime)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-row" style="margin-top:12px;">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Module progress ${p}%">
+              <div class="progress-fill" style="width:${p}%;"></div>
+            </div>
+            <div class="progress-text">${p}%</div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="ghost" data-open="${mod.id}" aria-label="View ${mod.title} details">View Details</button>
+            <button class="btn" data-complete="${mod.id}" ${isComplete ? 'disabled' : ''} aria-label="${isComplete ? 'Module completed' : 'Mark module complete'}">
+              ${isComplete ? '✓ Completed' : 'Mark Complete'}
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      qs('[data-open]').forEach(btn => btn.addEventListener('click', e => openModal(e.currentTarget.dataset.open)));
+      qs('[data-complete]').forEach(btn => btn.addEventListener('click', e => {
+        markModuleCompleted(e.currentTarget.dataset.complete);
+      }));
+
+      observeInView();
+    }
+
+    /************************************************************************
+     * Modal
+     ************************************************************************/
+    const modal = $('#modal');
+    const modalContent = $('#modalContent');
+    const modalClose = $('#modalClose');
+    let lastFocused = null;
+
+    function openModal(moduleId) {
+      const mod = MODULES.find(m => m.id === moduleId);
+      if (!mod) return;
+      
+      lastFocused = document.activeElement;
+      const prog = appState.progress[moduleId] || 0;
+      const total = mod.progress.total;
+      
+      modalContent.innerHTML = `
+        <h2 id="modalTitle">${escapeHtml(mod.title)}</h2>
+        <p class="muted">${escapeHtml(mod.description)}</p>
+        
+        <div style="margin-top:18px;">
+          <h3 style="font-size:1.1rem;margin-bottom:12px;">Course Sections</h3>
+          ${Array.isArray(mod.sections) && mod.sections.length ? mod.sections.map((s, idx) => `
+            <section style="margin-bottom:16px; padding:14px; background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border-radius:10px; border:1px solid var(--glass-border);">
+              <h4 style="margin:0 0 8px 0;font-weight:700;font-size:1rem;">
+                ${idx + 1}. ${escapeHtml(s.title || 'Section')}
+                ${s.time ? `<span class="muted" style="font-weight:400;font-size:0.9rem;"> • ${escapeHtml(s.time)}</span>` : ''}
+              </h4>
+              ${s.objectives ? '<ul class="muted" style="margin:8px 0;padding-left:20px;">' + s.objectives.map(o => `<li style="margin:4px 0;">${escapeHtml(o)}</li>`).join('') + '</ul>' : ''}
+            </section>
+          `).join('') : `<div class="muted">No detailed content available for this module yet.</div>`}
+        </div>
+
+        <div style="margin-top:18px;padding:14px;background:rgba(37,99,235,0.05);border-radius:10px;border:1px solid var(--glass-border);">
+          <strong>Progress:</strong> ${prog} of ${total} sections completed (${percent(prog, total)}%)
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:10px;justify-content:flex-end;">
+          <button class="ghost" id="modalCloseBtn">Close</button>
+          <button class="btn" id="modalAddProgress" ${prog >= total ? 'disabled' : ''}>
+            ${prog >= total ? '✓ Completed' : 'Mark as Complete'}
+          </button>
+        </div>
+      `;
+      
+      modal.setAttribute('aria-hidden', 'false');
+      trapFocus(modal);
+      
+      $('#modalAddProgress').addEventListener('click', () => {
+        markModuleCompleted(moduleId);
+        closeModal();
+      });
+      $('#modalCloseBtn').addEventListener('click', closeModal);
+      modalClose.addEventListener('click', closeModal);
+      document.addEventListener('keydown', onModalKeyDown);
+    }
+
+    function closeModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+      document.removeEventListener('keydown', onModalKeyDown);
+    }
+
+    function onModalKeyDown(e) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Tab') trapTabKey(e, modal);
+    }
+
+    function trapFocus(root) {
+      const focusable = root.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length) focusable[0].focus();
+    }
+
+    function trapTabKey(e, root) {
+      const focusable = Array.from(root.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')).filter(n => n.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    /************************************************************************
+     * Quiz Rendering with Retake
+     ************************************************************************/
+    function renderQuizzes() {
+      const container = $('#quizContainer');
+      container.innerHTML = '';
+
+      QUIZZES.forEach(quiz => {
+        const quizDiv = document.createElement('div');
+        quizDiv.style.marginBottom = '24px';
+        
+        // Calculate score
+        let correct = 0, answered = 0;
+        quiz.questions.forEach((q, idx) => {
+          const key = `${quiz.id}-${idx}`;
+          if (appState.quizAnswers[key] !== undefined) {
+            answered++;
+            if (appState.quizAnswers[key] === q.correct) correct++;
+          }
+        });
+        const allAnswered = answered === quiz.questions.length;
+        const score = allAnswered ? Math.round((correct / quiz.questions.length) * 100) : 0;
+        
+        let quizHTML = `
+          <h3 style="margin-bottom:16px;">${escapeHtml(quiz.title)}</h3>
+          ${allAnswered ? `
+            <div class="quiz-score">
+              <strong>Your Score: ${score}%</strong> (${correct}/${quiz.questions.length} correct)
+              <button class="ghost" data-retake="${quiz.id}" style="margin-left:12px;">🔄 Retake Quiz</button>
+            </div>
+          ` : ''}
+        `;
+        
+        quiz.questions.forEach((q, qIdx) => {
+          const answeredIdx = appState.quizAnswers[`${quiz.id}-${qIdx}`];
+          const isAnswered = answeredIdx !== undefined;
+          const isCorrect = answeredIdx === q.correct;
+          
+          quizHTML += `
+            <div class="quiz-question">
+              <strong>${qIdx + 1}. ${escapeHtml(q.question)}</strong>
+              <div class="quiz-options">
+                ${q.options.map((opt, optIdx) => {
+                  let optClass = 'quiz-option';
+                  if (isAnswered) {
+                    if (optIdx === q.correct) optClass += ' correct';
+                    else if (optIdx === answeredIdx) optClass += ' incorrect';
+                  }
+                  return `<div class="${optClass}" data-quiz="${quiz.id}" data-question="${qIdx}" data-option="${optIdx}" style="${isAnswered ? 'cursor:default;' : ''}">${escapeHtml(opt)}</div>`;
+                }).join('')}
+              </div>
+              ${isAnswered ? `
+                <div class="quiz-result ${isCorrect ? 'correct' : 'incorrect'}">
+                  ${isCorrect ? '✓ Correct!' : '✗ Incorrect'} ${escapeHtml(q.explanation)}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        
+        quizDiv.innerHTML = quizHTML;
+        container.appendChild(quizDiv);
+      });
+
+      // Quiz answer listeners
+      qs('.quiz-option').forEach(opt => {
+        opt.addEventListener('click', e => {
+          const target = e.currentTarget;
+          const quizId = target.dataset.quiz;
+          const qIdx = parseInt(target.dataset.question);
+          const optIdx = parseInt(target.dataset.option);
+          
+          const key = `${quizId}-${qIdx}`;
+          if (appState.quizAnswers[key] !== undefined) return;
+          
+          appState.quizAnswers[key] = optIdx;
+          renderQuizzes();
+          updateStatsWidget();
+          checkAchievements();
+          checkCertificate();
+        });
+      });
+
+      // Retake listeners
+      qs('[data-retake]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const quizId = e.currentTarget.dataset.retake;
+          const quiz = QUIZZES.find(q => q.id === quizId);
+          if (quiz) {
+            quiz.questions.forEach((q, idx) => {
+              delete appState.quizAnswers[`${quizId}-${idx}`];
+            });
+            renderQuizzes();
+            updateStatsWidget();
+          }
+        });
+      });
+    }
+
+    /************************************************************************
+     * Tools/Simulators Section
+     ************************************************************************/
+    function renderTools() {
+      const container = $('#toolsContainer');
+      container.innerHTML = `
+        <!-- Password Strength Tester -->
+        <div class="tool-card">
+          <h3>🔐 Password Strength Tester</h3>
+          <p class="muted">Test the strength of your passwords in real-time.</p>
+          <input type="text" id="passwordInput" class="tool-input" placeholder="Enter a password to test..." aria-label="Password to test">
+          <div id="passwordStrength" class="tool-output" style="display:none;"></div>
+          <div id="passwordTips" style="margin-top:12px;"></div>
+        </div>
+
+        <!-- Phishing Email Simulator -->
+        <div class="tool-card">
+          <h3>🎣 Phishing Email Detector</h3>
+          <p class="muted">Practice identifying phishing attempts. Click the red flags to reveal them!</p>
+          <div class="phishing-email" id="phishingEmail1">
+            <div style="margin-bottom:12px;"><strong>From:</strong> <span class="red-flag" title="Suspicious domain">security@paypa1-verify.com</span></div>
+            <div style="margin-bottom:12px;"><strong>Subject:</strong> <span class="red-flag" title="Creates urgency">URGENT: Your account will be suspended in 24 hours!</span></div>
+            <div style="margin-bottom:8px;"><strong>Message:</strong></div>
+            <div style="line-height:1.6;">
+              Dear Valued Customer,<br><br>
+              We have detected <span class="red-flag" title="Vague security concern">suspicious activity</span> on your account. 
+              You must verify your identity immediately by clicking the link below or your account will be 
+              <span class="red-flag" title="Threatening language">permanently disabled</span>.<br><br>
+              <a href="#" class="red-flag" style="color:var(--accent);" title="Suspicious URL">Click here to verify your account</a><br><br>
+              Thank you,<br>
+              <span class="red-flag" title="Generic signature">Customer Support Team</span>
+            </div>
+          </div>
+          <button class="btn" id="revealPhishing" style="margin-top:12px;">Reveal All Red Flags</button>
+          <div id="phishingExplanation" style="display:none;margin-top:12px;padding:14px;background:rgba(239,68,68,0.1);border-radius:8px;border:1px solid var(--danger);">
+            <strong>🚩 Red Flags Identified:</strong>
+            <ul style="margin:8px 0;padding-left:20px;line-height:1.6;">
+              <li>Misspelled domain (paypa1 vs paypal)</li>
+              <li>Creates false urgency and fear</li>
+              <li>Vague security concerns without specifics</li>
+              <li>Threatening language about account suspension</li>
+              <li>Generic greeting and signature</li>
+              <li>Suspicious link (hover to see real URL)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2FA Setup Simulator -->
+        <div class="tool-card">
+          <h3>🛡️ Two-Factor Authentication Demo</h3>
+          <p class="muted">Experience how 2FA protects your accounts.</p>
+          <div style="padding:16px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--glass-border);">
+            <div style="margin-bottom:16px;">
+              <label style="display:block;margin-bottom:8px;font-weight:600;">Step 1: Enter Username & Password</label>
+              <input type="text" placeholder="Username" class="tool-input" style="margin-bottom:8px;" id="demo2faUser">
+              <input type="password" placeholder="Password" class="tool-input" id="demo2faPass">
+            </div>
+            <button class="btn" id="demo2faLogin" style="width:100%;">Login</button>
+            <div id="demo2faStep2" style="display:none;margin-top:16px;">
+              <label style="display:block;margin-bottom:8px;font-weight:600;">Step 2: Enter 6-Digit Code from Authenticator App</label>
+              <input type="text" placeholder="000000" maxlength="6" class="tool-input" id="demo2faCode" style="text-align:center;font-size:1.5rem;letter-spacing:0.5em;">
+              <button class="btn" id="demo2faVerify" style="width:100%;margin-top:12px;">Verify Code</button>
+            </div>
+            <div id="demo2faSuccess" style="display:none;margin-top:16px;padding:14px;background:rgba(34,197,94,0.1);border-radius:8px;border:1px solid var(--success);text-align:center;">
+              <strong style="color:var(--success);font-size:1.2rem;">✓ Login Successful!</strong>
+              <p style="margin:8px 0 0 0;" class="muted">Your account is protected with 2FA. Even if someone knows your password, they can't access your account without the verification code.</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Password strength tester
+      const passwordInput = $('#passwordInput');
+      const strengthDiv = $('#passwordStrength');
+      const tipsDiv = $('#passwordTips');
+      
+      passwordInput.addEventListener('input', e => {
+        const pwd = e.target.value;
+        if (!pwd) {
+          strengthDiv.style.display = 'none';
+          tipsDiv.innerHTML = '';
+          return;
+        }
+
+        let strength = 0;
+        const tips = [];
+
+        if (pwd.length >= 12) strength += 25; else tips.push('Use at least 12 characters');
+        if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) strength += 25; else tips.push('Mix uppercase and lowercase');
+        if (/\d/.test(pwd)) strength += 25; else tips.push('Include numbers');
+        if (/[^a-zA-Z0-9]/.test(pwd)) strength += 25; else tips.push('Add special characters (!@#$%^&*)');
+
+        let strengthClass = 'strength-weak';
+        let strengthText = 'Weak';
+        if (strength >= 75) { strengthClass = 'strength-strong'; strengthText = 'Strong'; }
+        else if (strength >= 50) { strengthClass = 'strength-medium'; strengthText = 'Medium'; }
+
+        strengthDiv.className = `tool-output ${strengthClass}`;
+        strengthDiv.style.display = 'block';
+        strengthDiv.innerHTML = `<strong>Strength: ${strengthText}</strong> (${strength}/100)`;
+
+        if (tips.length > 0) {
+          tipsDiv.innerHTML = `<div class="muted"><strong>Tips to improve:</strong><ul style="margin:4px 0;padding-left:20px;">${tips.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+        } else {
+          tipsDiv.innerHTML = `<div style="color:var(--success);"><strong>✓ Excellent password!</strong></div>`;
+        }
+      });
+
+      // Phishing simulator
+      $('#revealPhishing').addEventListener('click', () => {
+        $('#phishingEmail1').classList.add('revealed');
+        $('#phishingExplanation').style.display = 'block';
+        qs('.red-flag').forEach(flag => {
+          flag.style.background = 'rgba(239,68,68,0.25)';
+          flag.style.outline = '2px solid var(--danger)';
+        });
+      });
+
+      qs('.red-flag').forEach(flag => {
+        flag.addEventListener('click', function() {
+          this.style.background = 'rgba(239,68,68,0.25)';
+          this.style.outline = '2px solid var(--danger)';
+          alert(`🚩 Red Flag: ${this.getAttribute('title')}`);
+        });
+      });
+
+      // 2FA Demo
+      $('#demo2faLogin').addEventListener('click', () => {
+        const user = $('#demo2faUser').value;
+        const pass = $('#demo2faPass').value;
+        if (user && pass) {
+          $('#demo2faStep2').style.display = 'block';
+          $('#demo2faCode').focus();
+        } else {
+          alert('Please enter username and password');
+        }
+      });
+
+      $('#demo2faVerify').addEventListener('click', () => {
+        const code = $('#demo2faCode').value;
+        if (code.length === 6) {
+          $('#demo2faSuccess').style.display = 'block';
+          $('#demo2faStep2').style.display = 'none';
+        } else {
+          alert('Please enter a 6-digit code');
+        }
+      });
+
+      $('#demo2faCode').addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/\D/g, '');
+      });
+    }
+
+    /************************************************************************
+     * Glossary Rendering
+     ************************************************************************/
+    function renderGlossary() {
+      const container = $('#glossaryContainer');
+      const html = GLOSSARY.map(item => `
+        <dl class="glossary-term">
+          <dt>${escapeHtml(item.term)}</dt>
+          <dd>${escapeHtml(item.definition)}</dd>
+        </dl>
+      `).join('');
+      container.innerHTML = html;
+    }
+
+    /************************************************************************
+     * Resources Rendering with Clickable Links
+     ************************************************************************/
+    function renderResources() {
+      const container = $('#resourcesContainer');
+      const html = RESOURCES.map(resource => `
+        <div class="resource-card">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;">${escapeHtml(resource.title)}</h3>
+          <p class="muted" style="margin:0 0 12px 0;">${escapeHtml(resource.description)}</p>
+          <ul class="muted" style="margin:0;padding-left:20px;">
+            ${resource.links.map(link => `
+              <li style="margin:6px 0;">
+                ${link.url ? `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="resource-link">${escapeHtml(link.name)}</a>` : `<strong>${escapeHtml(link.name)}</strong>`}
+                — ${escapeHtml(link.desc)}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+      container.innerHTML = html;
+    }
+
+    /************************************************************************
+     * Achievements Rendering
+     ************************************************************************/
+    function renderAchievements() {
+      const container = $('#achievementsContainer');
+      const html = `
+        <div class="badges-grid">
+          ${ACHIEVEMENTS.map(ach => {
+            const earned = appState.badges.includes(ach.id);
+            return `
+              <div class="badge-item ${earned ? 'earned' : 'locked'}" aria-label="${earned ? 'Earned' : 'Locked'}: ${ach.name}">
+                <span class="badge-icon">${ach.icon}</span>
+                <div class="badge-name">${escapeHtml(ach.name)}</div>
+                <div class="muted" style="font-size:0.75rem;margin-top:4px;">${escapeHtml(ach.description)}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+      container.innerHTML = html;
+    }
+
+    /************************************************************************
+     * Progress View with Certificate
+     ************************************************************************/
+    function updateProgressView() {
+      const container = $('#progressContainer');
+      
+      const completedModules = MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length;
+      const totalModules = MODULES.length;
+      const overallPercent = percent(completedModules, totalModules);
+      
+      let quizzesCompleted = 0, quizzesCorrect = 0, totalQuestions = 0;
+      QUIZZES.forEach(quiz => {
+        quiz.questions.forEach((q, idx) => {
+          totalQuestions++;
+          const key = `${quiz.id}-${idx}`;
+          if (appState.quizAnswers[key] !== undefined) {
+            quizzesCompleted++;
+            if (appState.quizAnswers[key] === q.correct) quizzesCorrect++;
+          }
+        });
+      });
+      
+      const quizPercent = totalQuestions > 0 ? percent(quizzesCompleted, totalQuestions) : 0;
+      const allComplete = completedModules === totalModules && quizzesCompleted === totalQuestions;
+      
+      container.innerHTML = `
+        <div style="display:grid;gap:16px;">
+          <div class="resource-card">
+            <h3 style="margin:0 0 12px 0;">Overall Progress</h3>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span>Modules Completed</span>
+                <strong>${completedModules} / ${totalModules}</strong>
+              </div>
+              <div class="progress-bar" style="height:12px;">
+                <div class="progress-fill" style="width:${overallPercent}%;"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span>Quiz Questions Answered</span>
+                <strong>${quizzesCompleted} / ${totalQuestions}</strong>
+              </div>
+              <div class="progress-bar" style="height:12px;">
+                <div class="progress-fill" style="width:${quizPercent}%;"></div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span>Quiz Accuracy</span>
+                <strong>${quizzesCompleted > 0 ? percent(quizzesCorrect, quizzesCompleted) : 0}%</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <h3 style="margin:0 0 12px 0;">Module Details</h3>
+            ${MODULES.map(m => {
+              const prog = appState.progress[m.id] || 0;
+              const total = m.progress.total;
+              const p = percent(prog, total);
+              return `
+                <div style="margin-bottom:12px;">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span>${escapeHtml(m.title)}</span>
+                    <span class="muted">${prog}/${total}</span>
+                  </div>
+                  <div class="progress-bar" style="height:8px;">
+                    <div class="progress-fill" style="width:${p}%;"></div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          ${allComplete ? `
+            <div id="certificateContainer"></div>
+          ` : ''}
+        </div>
+      `;
+
+      if (allComplete) {
+        showCertificate();
+      }
+    }
+
+    /************************************************************************
+     * Certificate Generation
+     ************************************************************************/
+    function checkCertificate() {
+      const completedModules = MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length;
+      let totalQ = 0, answeredQ = 0;
+      QUIZZES.forEach(quiz => {
+        quiz.questions.forEach((q, idx) => {
+          totalQ++;
+          if (appState.quizAnswers[`${quiz.id}-${idx}`] !== undefined) answeredQ++;
+        });
+      });
+      
+      if (completedModules === MODULES.length && answeredQ === totalQ) {
+        $('#downloadCert').style.display = 'inline-block';
+        triggerConfetti();
+      }
+    }
+
+    function showCertificate() {
+      const container = $('#certificateContainer');
+      const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      container.innerHTML = `
+        <div class="certificate">
+          <h2>🎓 Certificate of Completion</h2>
+          <p class="cert-text">This certifies that</p>
+          <p class="cert-name">Cybersecurity Champion</p>
+          <p class="cert-text">has successfully completed the</p>
+          <p class="cert-text" style="font-weight:700;font-size:1.2rem;">Cybersecurity Awareness Training Program</p>
+          <p class="cert-text" style="margin-top:20px;">Completed on ${date}</p>
+          <p class="muted" style="margin-top:16px;font-size:0.9rem;">
+            ${MODULES.length} modules completed • ${QUIZZES.reduce((acc, q) => acc + q.questions.length, 0)} quiz questions answered
+          </p>
+        </div>
+      `;
+    }
+
+    function triggerConfetti() {
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = ['#2563eb', '#60a5fa', '#22c55e', '#f59e0b', '#ef4444'][Math.floor(Math.random() * 5)];
+          confetti.style.animationDelay = Math.random() * 0.5 + 's';
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 30);
+      }
+    }
+
+    $('#downloadCert').addEventListener('click', () => {
+      alert('🎉 Congratulations! In a full implementation, this would generate a downloadable PDF certificate. For now, you can screenshot the certificate from the Progress section!');
+    });
+
+    /************************************************************************
+     * Export Progress
+     ************************************************************************/
+    $('#exportProgress').addEventListener('click', () => {
+      const data = {
+        exportDate: new Date().toISOString(),
+        modules: MODULES.map(m => ({
+          id: m.id,
+          title: m.title,
+          progress: appState.progress[m.id] || 0,
+          total: m.progress.total,
+          percentComplete: percent(appState.progress[m.id] || 0, m.progress.total)
+        })),
+        quizzes: QUIZZES.map(q => {
+          let correct = 0, answered = 0;
+          q.questions.forEach((quest, idx) => {
+            const key = `${q.id}-${idx}`;
+            if (appState.quizAnswers[key] !== undefined) {
+              answered++;
+              if (appState.quizAnswers[key] === quest.correct) correct++;
+            }
+          });
+          return {
+            id: q.id,
+            title: q.title,
+            answered,
+            total: q.questions.length,
+            correct,
+            score: answered > 0 ? percent(correct, answered) : 0
+          };
+        }),
+        badges: appState.badges,
+        summary: {
+          modulesCompleted: MODULES.filter(m => (appState.progress[m.id] || 0) >= m.progress.total).length,
+          totalModules: MODULES.length,
+          badgesEarned: appState.badges.length,
+          totalBadges: ACHIEVEMENTS.length
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `cybersecurity-progress-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    /************************************************************************
+     * Navigation
+     ************************************************************************/
+    function showSection(sectionName) {
+      qs('.section-content').forEach(s => s.classList.remove('active'));
+      qs('nav.sidebar a').forEach(a => a.classList.remove('active'));
+      
+      const section = $(`#${sectionName}Section`);
+      if (section) section.classList.add('active');
+      
+      const navLink = qs(`nav.sidebar a[data-section="${sectionName}"]`)[0];
+      if (navLink) navLink.classList.add('active');
+      
+      // Render section-specific content
+      if (sectionName === 'quizzes') renderQuizzes();
+      if (sectionName === 'tools') renderTools();
+      if (sectionName === 'glossary') renderGlossary();
+      if (sectionName === 'resources') renderResources();
+      if (sectionName === 'achievements') renderAchievements();
+      if (sectionName === 'progress') updateProgressView();
+    }
+
+    qs('nav.sidebar a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const section = e.currentTarget.dataset.section;
+        showSection(section);
+      });
+    });
+
+    /************************************************************************
+     * IntersectionObserver for animations
+     ************************************************************************/
+    function observeInView() {
+      const items = document.querySelectorAll('.module');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          entries.forEach(en => {
+            if (en.isIntersecting) {
+              en.target.classList.add('in-view');
+              obs.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(i => io.observe(i));
+      } else {
+        items.forEach(i => i.classList.add('in-view'));
+      }
+    }
+
+    /************************************************************************
+     * Reset Progress
+     ************************************************************************/
+    $('#refreshBtn').addEventListener('click', () => {
+      if (confirm('Reset all progress? This will clear your completed modules, quiz answers, and badges.')) {
+        appState.progress = {};
+        appState.quizAnswers = {};
+        appState.badges = [];
+        $('#downloadCert').style.display = 'none';
+        renderModules();
+        updateStatsWidget();
+        updateProgressView();
+        showSection('modules');
+      }
+    });
+
+    /************************************************************************
+     * Keyboard Shortcuts
+     ************************************************************************/
+    document.addEventListener('keydown', (e) => {
+      // Escape closes modal
+      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+        closeModal();
+      }
+      
+      // Ctrl/Cmd + K for search (placeholder for future)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        // TODO: Implement search functionality
+        console.log('Search shortcut triggered (not yet implemented)');
+      }
+
+      // Number keys 1-7 for navigation
+      if (e.altKey && e.key >= '1' && e.key <= '7') {
+        e.preventDefault();
+        const sections = ['modules', 'quizzes', 'tools', 'glossary', 'resources', 'achievements', 'progress'];
+        const idx = parseInt(e.key) - 1;
+        if (sections[idx]) showSection(sections[idx]);
+      }
+    });
+
+    /************************************************************************
+     * Initialize Application
+     ************************************************************************/
+    function init() {
+      renderModules();
+      renderResources();
+      renderGlossary();
+      updateStatsWidget();
+      updateProgressView();
+      renderAchievements();
+      checkAchievements();
+      checkCertificate();
+    }
+
+    // Boot the app
+    init();
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInRight {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    console.log('%c🛡️ Cybersecurity Awareness Dashboard Loaded!', 'font-size:16px;color:#2563eb;font-weight:bold;');
+    console.log('%cKeyboard Shortcuts:', 'font-size:14px;font-weight:bold;');
+    console.log('Alt+1-7: Navigate sections');
+    console.log('Escape: Close modal');
+    console.log('%c\n📋 TODO List embedded in source code', 'font-size:12px;color:#6b7280;');
+
+  </script>
+</body>
+</html>
