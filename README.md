@@ -12,7 +12,3 @@ This project is perfect for anyone looking to improve their online security awar
 
 ## Dashboard
 <img width="2842" height="1454" alt="mainscreen" src="https://github.com/user-attachments/assets/9f12ad85-cec8-4f93-ae6b-2e2cf5f32be1" />
-
----
-
-## Implementation & TODO List
