@@ -6,7 +6,9 @@ const qs = (sel) => Array.from(document.querySelectorAll(sel));
 
 // In-memory storage
 const appState = {
+  /*
   theme: "light",
+  */
   progress: {},
   quizAnswers: {},
   badges: [],
@@ -678,11 +680,11 @@ function applyTheme(theme) {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
   applyTheme(prefersDark ? "dark" : "light");
 })();
-
+/*
 $("#themeToggle").addEventListener("click", () => {
   applyTheme(appState.theme === "dark" ? "light" : "dark");
 });
-
+*/
 /************************************************************************
  * Utility Functions
  ************************************************************************/
@@ -1746,3 +1748,129 @@ console.log(
   "%c\n📋 TODO List embedded in source code",
   "font-size:12px;color:#6b7280;"
 );
+
+/************************************************************************
+ * Hacker Text
+ ************************************************************************/
+
+(function () {
+  const canvas = document.getElementById('matrixCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let width, height, columns, fontSize, drops;
+  const deviceRatio = window.devicePixelRatio || 1;
+
+  // Configuration (tweak these)
+  const config = {
+    font: 'monospace',
+    fontSizeBase: 14,     // base pixel size on normal DPR; multiplies with device ratio
+    density: 0.5,         // 0.2 (sparse) -> 1.0 (dense)
+    speedBase: 1.0,       // multiplies drop increment
+    alphaFade: 0.05,      // trail fade strength (0.02 -> long trails)
+    charSet: 'abcdefghijklmnopqrstuvwxyz0123456789@#$%&*+-' // characters used
+  };
+
+  function resize() {
+    // size canvas to #app area in device pixels
+    const rect = canvas.parentElement.getBoundingClientRect();
+    width = Math.max(1, Math.floor(rect.width));
+    height = Math.max(1, Math.floor(rect.height));
+
+    canvas.width = Math.floor(width * deviceRatio);
+    canvas.height = Math.floor(height * deviceRatio);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    ctx.setTransform(deviceRatio, 0, 0, deviceRatio, 0, 0); // scale drawing to CSS pixels
+    setupColumns();
+  }
+
+  function setupColumns() {
+    // compute a font size adapted to container
+    fontSize = Math.max(10, config.fontSizeBase * (deviceRatio || 1));
+    ctx.font = fontSize + 'px ' + config.font;
+    columns = Math.floor(width / fontSize) || 1;
+    // density controls how many columns are active
+    const activeColumns = Math.max(1, Math.floor(columns * config.density));
+    drops = new Array(columns).fill(0);
+
+    // randomly initialize drop positions for a more organic start
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * height / fontSize);
+      // optionally disable many columns to reduce density
+      if (Math.random() > config.density) drops[i] = 0;
+    }
+  }
+
+  function pickChar() {
+    const chars = config.charSet;
+    return chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  let rafId;
+  function draw() {
+    // translucent black overlay to create trailing effect
+    ctx.fillStyle = `rgba(0,0,0,${config.alphaFade})`;
+    ctx.fillRect(0, 0, width, height);
+
+    // draw characters
+    for (let i = 0; i < columns; i++) {
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+
+      // bright head
+      ctx.fillStyle = '#b8ffb8'; // light green head
+      ctx.fillText(pickChar(), x, y);
+
+      // faded body (draw a second, slightly higher, dim character to give depth)
+      if (y - fontSize > 0) {
+        ctx.fillStyle = 'rgba(0,200,0,0.35)'; // dim green trail
+        ctx.fillText(pickChar(), x, y - fontSize * 0.6);
+      }
+
+      // move drop forward; speed varies by column for organic look
+      const speed = config.speedBase * (0.5 + Math.random()); // small variation
+      drops[i] = drops[i] + speed * (Math.random() > 0.98 ? 10 : 1);
+
+      // reset drop to top with small random chance when below screen
+      if (drops[i] * fontSize > height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+    }
+    rafId = requestAnimationFrame(draw);
+  }
+
+  // performance tweaks for mobile
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 600);
+  }
+
+  function start() {
+    // lower intensity on mobile for battery/CPU
+    if (isMobile()) {
+      config.density = Math.min(0.45, config.density);
+      config.fontSizeBase = Math.max(10, config.fontSizeBase * 0.9);
+      config.alphaFade = Math.max(0.06, config.alphaFade);
+    }
+    resize();
+    cancelAnimationFrame(rafId);
+    draw();
+  }
+
+  // init
+  window.addEventListener('resize', () => {
+    // debounce resize
+    clearTimeout(canvas._resizeTimer);
+    canvas._resizeTimer = setTimeout(resize, 120);
+  });
+
+  // pause when tab not visible to save CPU
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else draw();
+  });
+
+  // start after a tick so layout settles
+  requestAnimationFrame(start);
+})();
