@@ -928,3 +928,63 @@ footer {
       transform: translateY(0);
     }
   }
+
+
+  /* Tablet version */
+@media (max-width: 1024px) {
+  .splash {
+
+    height: 100vh; /* slightly smaller than full screen */
+    padding: 1rem;
+  }
+  .overlay {
+    padding: 1.5rem;
+  }
+  .content {
+    max-width: 600px;
+  }
+  .headline {
+    font-size: 2rem;
+  }
+  .splash-buttons {
+    gap: 0.75rem;
+  }
+  .splash-btn {
+    padding: 0.85rem 1.8rem;
+    font-size: 1.2rem;
+  }
+  .splash-logo img {
+    height: 220px;
+  }
+}
+
+/* Phone / Mobile version */
+@media (max-width: 640px) {
+  .splash {
+    background-position: left center;
+    height: 100vh;
+    padding: 0.75rem;
+  }
+  .overlay {
+    padding: 1rem;
+  }
+  .content {
+    max-width: 90%;
+  }
+  .headline {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+  .splash-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .splash-btn {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  .splash-logo img {
+    height: 180px;
+  }
+}

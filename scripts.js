@@ -1626,6 +1626,10 @@ qs("nav.sidebar a").forEach((a) => {
   });
 });
 
+function scrollToLearn() {
+  document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+}
+
 /************************************************************************
  * IntersectionObserver for animations
  ************************************************************************/
