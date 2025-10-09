@@ -857,7 +857,13 @@
         .headline {
           font-size: 4rem;
         }
+    }
+      @media (max-width: 768px) {
+                .footer-a:nth-child(n+2) {
+            display: none;
+        }
       }
+      
       @media (max-width: 1024px) {
         .splash {
           height: 100vh;
@@ -938,13 +944,7 @@
         color: var(--muted);
         text-decoration: none;
       }
-      .footer-li:last-child {
-        grid-column: 1/2;
-        grid-row: 1/2;
-      }
-      .footer-li:hover ~ li p {
-        animation: wave-animation 0.3s infinite;
-      }
+
       .footer-div {
         bottom: 0;
         width: 100%;
@@ -1223,7 +1223,7 @@
               >• Github
             </a>
           </li>
-          <li class="footer-li"><p>👋</p></li>
+          <li class="footer-li"></li>
         </ul>
       </div>
     </div>
