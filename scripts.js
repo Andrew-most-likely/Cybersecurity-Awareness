@@ -24,10 +24,9 @@ const MODULES = [
     icon: "lock",
     title: "Password Security",
     description:
-      "Create strong, unique passwords and use password managers effectively.",
-    difficulty: "Beginner",
-    estimatedTime: "15 min",
-    progress: { completed: 0, total: 5 },
+      "Learn to create strong, unique passwords and manage them safely.",
+
+    progress: { completed: 0, total: 3 },
     sections: [
       {
         type: "introduction",
@@ -37,17 +36,33 @@ const MODULES = [
           "Learn about common password vulnerabilities",
           "Recognize the cost of password breaches",
         ],
-        time: "5 min",
+
+        content: `
+Passwords are the first line of defense for protecting your online accounts and personal data. They prove that you are the rightful owner of your account every time you log in. If someone gains access to your passwords, they can impersonate you, steal your identity, or gain control of your finances and sensitive information.
+
+Many people underestimate how valuable their data is to criminals. Hackers can use stolen passwords to access email, bank accounts, or social media. They may also sell your credentials on the dark web to other criminals. Even if you think you have nothing to hide, your personal information can be used in scams, identity theft, and fraud.
+
+Common password weaknesses include using short passwords, predictable words, or reusing the same password across multiple accounts. If one site is breached, attackers can use your reused password to break into others. By understanding the importance of strong passwords, you can take real steps to protect your online life.
+        `,
       },
       {
         type: "lesson",
         title: "Creating Strong Passwords",
         objectives: [
-          "Use at least 12 characters with mixed case, numbers, and symbols",
-          "Avoid dictionary words and personal information",
-          "Create unique passwords for each account",
+          "Use long passwords with mixed characters",
+          "Avoid predictable or personal information",
+          "Make each password unique",
         ],
-        time: "8 min",
+
+        content: `
+A strong password is one that attackers cannot easily guess or crack. The best passwords are long, complex, and unique for each account. You should always use at least twelve characters, mixing uppercase and lowercase letters, numbers, and symbols.
+
+Avoid using dictionary words, your name, birthdate, pet names, or common patterns like "12345" or "qwerty." Attackers often use automated tools that can guess thousands of passwords per second, especially those that follow predictable patterns.
+
+One approach is to use a passphrase. This is a series of random but memorable words, like "CoffeeRiverBridgeLight." A passphrase is easier to remember and can still be extremely secure, especially if you include numbers or symbols.
+
+Every account you have should use a different password. If one is stolen, your others remain safe. Consider writing down a strong password example such as "Tr33!Rain7Horse$Map" — complex, long, and unique.
+        `,
       },
       {
         type: "tool",
@@ -57,7 +72,16 @@ const MODULES = [
           "Learn to choose a reputable password manager",
           "Set up your first password vault",
         ],
-        time: "10 min",
+
+        content: `
+A password manager securely stores all of your passwords in one encrypted vault. It helps you create and use strong passwords without needing to remember each one. You only need to remember one master password to unlock your vault.
+
+Most password managers can automatically fill in your credentials when you visit a login page. They can also generate random, highly secure passwords for new accounts. Reputable password managers encrypt your data locally, meaning even the company cannot access your passwords.
+
+When choosing a password manager, look for one with a strong reputation, transparent security practices, and support for multi-device syncing. Examples include Bitwarden, 1Password, and Dashlane. Avoid unknown or unverified tools.
+
+After installing a password manager, create a master password that is long and memorable but unique to you. Once your vault is ready, start saving all of your existing passwords inside it and let the manager generate new ones going forward.
+        `,
       },
     ],
   },
@@ -65,30 +89,45 @@ const MODULES = [
     id: "2fa",
     icon: "shield",
     title: "Two-Factor Authentication",
-    description: "Add an extra layer of security to your accounts with 2FA.",
-    difficulty: "Beginner",
-    estimatedTime: "12 min",
-    progress: { completed: 0, total: 4 },
+    description: "Add an extra layer of protection to your online accounts.",
+
+    progress: { completed: 0, total: 2 },
     sections: [
       {
         type: "introduction",
-        title: "What is 2FA?",
+        title: "What is Two-Factor Authentication",
         objectives: [
           "Learn how two-factor authentication works",
           "Understand different types of 2FA",
-          "Know when to use 2FA",
+          "Know when to use it",
         ],
-        time: "6 min",
+
+        content: `
+Two-Factor Authentication, often called 2FA, adds a second layer of security to your accounts. It means that even if someone steals your password, they still need another piece of information to log in.
+
+The most common forms of 2FA are one-time codes sent to your phone or generated by an authentication app. Other types include hardware security keys, biometric factors like fingerprints, or codes sent by email. The idea is that access requires both something you know (your password) and something you have (your phone or device).
+
+Without 2FA, a stolen password alone can give an attacker full access. With it enabled, even a hacker who knows your password would also need your physical device to get in. It greatly reduces your risk of being hacked.
+        `,
       },
       {
         type: "lesson",
-        title: "Setting Up 2FA",
+        title: "Setting Up Two-Factor Authentication",
         objectives: [
-          "Enable 2FA on critical accounts",
-          "Use authenticator apps instead of SMS",
-          "Save backup codes securely",
+          "Enable 2FA on your important accounts",
+          "Use an authenticator app instead of SMS",
+          "Store backup codes safely",
         ],
-        time: "12 min",
+
+        content: `
+You should enable two-factor authentication on every important account, including email, banking, and social media. Most major websites support it in their security or privacy settings.
+
+When setting it up, choose an authenticator app like Google Authenticator, Authy, or Microsoft Authenticator instead of using text messages. SMS codes can sometimes be intercepted if someone tricks your phone company into transferring your number.
+
+After enabling 2FA, you will scan a QR code with your app, which then starts generating short one-time codes. These codes change every 30 seconds and must be entered along with your password when logging in.
+
+Make sure to save your backup codes in a secure place, such as your password manager or a printed copy stored safely. Backup codes are the only way to recover access if you lose your phone.
+        `,
       },
     ],
   },
@@ -96,11 +135,9 @@ const MODULES = [
     id: "phishing",
     icon: "phish",
     title: "Phishing Awareness",
-    description:
-      "Identify and avoid phishing attacks and suspicious communications.",
-    difficulty: "Intermediate",
-    estimatedTime: "18 min",
-    progress: { completed: 0, total: 4 },
+    description: "Learn how to spot and avoid phishing attacks.",
+
+    progress: { completed: 0, total: 2 },
     sections: [
       {
         type: "introduction",
@@ -108,19 +145,35 @@ const MODULES = [
         objectives: [
           "Recognize common phishing tactics",
           "Identify red flags in emails and messages",
-          "Understand the impact of phishing attacks",
+          "Understand the dangers of phishing attacks",
         ],
-        time: "7 min",
+
+        content: `
+Phishing is a type of scam where attackers trick you into giving away sensitive information, such as passwords, banking details, or personal data. It often comes in the form of an email or message that looks like it is from a trusted source.
+
+A typical phishing email may claim that there is a problem with your account or that you need to verify your identity. It often contains links to fake websites that look nearly identical to real ones. When you enter your information, it goes directly to the attacker.
+
+Common signs of phishing include poor grammar, urgent or threatening language, suspicious links, or requests for personal data. Always take time to verify who sent the message before clicking or replying.
+        `,
       },
       {
         type: "practice",
         title: "Spotting Phishing",
         objectives: [
           "Check sender addresses carefully",
-          "Verify links before clicking",
-          "Look for urgency and pressure tactics",
+          "Hover over links before clicking",
+          "Watch for urgency or threats",
         ],
-        time: "10 min",
+
+        content: `
+Before you click any link, check the sender's address carefully. Many phishing emails come from addresses that look similar to legitimate ones but contain slight differences, such as support@paypa1.com instead of support@paypal.com.
+
+Hover your mouse over any links to see where they lead before you click them. If the address looks suspicious or unfamiliar, do not proceed.
+
+Attackers often try to create a sense of urgency, such as warning you that your account will be closed unless you act immediately. This is a manipulation tactic. Take your time to verify the message through official websites or customer support instead of reacting quickly.
+
+Always remember, legitimate companies will never ask you to provide passwords or financial information through email or text messages.
+        `,
       },
     ],
   },
@@ -128,20 +181,26 @@ const MODULES = [
     id: "updates",
     icon: "refresh",
     title: "Software Updates",
-    description: "Keep your systems secure with timely updates and patches.",
-    difficulty: "Beginner",
-    estimatedTime: "10 min",
-    progress: { completed: 0, total: 3 },
+    description: "Learn why keeping your software updated keeps you safe.",
+
+    progress: { completed: 0, total: 1 },
     sections: [
       {
         type: "lesson",
         title: "Why Updates Matter",
         objectives: [
-          "Understand security vulnerabilities",
+          "Understand software vulnerabilities",
           "Learn about zero-day exploits",
           "Enable automatic updates",
         ],
-        time: "8 min",
+
+        content: `
+Software updates are not just about new features. They often include critical security patches that fix vulnerabilities found by researchers or attackers. When software remains unpatched, criminals can exploit those weaknesses to gain access to your device or data.
+
+A zero-day exploit is an attack that targets a vulnerability before the developer knows about it or releases a fix. This is why keeping software up to date is essential. Even a few days of delay can leave your system at risk.
+
+Always enable automatic updates for your operating system, browser, and important applications. This ensures that you receive security fixes as soon as they become available without having to remember to check manually.
+        `,
       },
     ],
   },
@@ -150,9 +209,8 @@ const MODULES = [
     icon: "wifi",
     title: "WiFi Security",
     description: "Protect yourself on public and home wireless networks.",
-    difficulty: "Intermediate",
-    estimatedTime: "14 min",
-    progress: { completed: 0, total: 3 },
+
+    progress: { completed: 0, total: 1 },
     sections: [
       {
         type: "lesson",
@@ -162,7 +220,16 @@ const MODULES = [
           "Secure your home router",
           "Avoid sensitive transactions on public WiFi",
         ],
-        time: "9 min",
+
+        content: `
+Public WiFi networks, like those in coffee shops or airports, are convenient but often insecure. Attackers can intercept unencrypted data on these networks to steal personal information such as passwords or credit card numbers. Avoid logging into sensitive accounts or making payments while using public WiFi.
+
+If you must connect, use a Virtual Private Network, or VPN, to encrypt your internet traffic. This prevents others on the same network from viewing what you are doing.
+
+At home, secure your router by changing its default administrator password and using strong encryption, such as WPA3. Regularly update your router's firmware and disable remote management features you do not need.
+
+By following these practices, you greatly reduce the risk of your network traffic being intercepted or your devices being compromised.
+        `,
       },
     ],
   },
@@ -170,25 +237,33 @@ const MODULES = [
     id: "backup",
     icon: "save",
     title: "Data Backup",
-    description: "Protect your data with regular backups and recovery plans.",
-    difficulty: "Intermediate",
-    estimatedTime: "12 min",
-    progress: { completed: 0, total: 3 },
+    description: "Protect your important data with regular backups.",
+
+    progress: { completed: 0, total: 1 },
     sections: [
       {
         type: "lesson",
         title: "Backup Strategies",
         objectives: [
           "Follow the 3-2-1 backup rule",
-          "Choose cloud and local backup solutions",
+          "Use both cloud and local backups",
           "Test your backups regularly",
         ],
-        time: "10 min",
+
+        content: `
+Data loss can happen at any time due to hardware failure, accidental deletion, or malware. Backing up your data ensures that you can recover it even if your device is damaged or compromised.
+
+The 3-2-1 backup rule is a simple and effective strategy. Keep three copies of your data: one primary and two backups. Store them on at least two different types of media, such as a hard drive and a cloud service, and keep one copy off-site, such as in cloud storage or at another location.
+
+Use reliable cloud storage services for automatic backups, but also keep a local backup on an external drive. Schedule regular backups and verify that they work by testing file recovery occasionally.
+
+By maintaining backups, you protect yourself from permanent data loss and ensure that your information is always recoverable.
+        `,
       },
     ],
   },
-
 ];
+
 
 /************************************************************************
  * Quiz Data - Expanded
@@ -699,13 +774,13 @@ function escapeHtml(s = "") {
     s.replace?.(
       /[&<>"']/g,
       (c) =>
-        ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        }[c])
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[c])
     ) || s
   );
 }
@@ -729,11 +804,10 @@ function showBadgeNotification(badges) {
       const notif = document.createElement("div");
       notif.style.cssText =
         "position:fixed;top:80px;right:20px;background:var(--card-bg);padding:16px 20px;border-radius:10px;box-shadow:var(--shadow);border:1px solid var(--glass-border);z-index:1000;animation:slideInRight 0.3s;backdrop-filter:blur(8px);";
-      notif.innerHTML = `<strong style="display:block;margin-bottom:4px;">${
-        badge.icon
-      } ${escapeHtml(badge.name)}</strong><span class="muted">${escapeHtml(
-        badge.description
-      )}</span>`;
+      notif.innerHTML = `<strong style="display:block;margin-bottom:4px;">${badge.icon
+        } ${escapeHtml(badge.name)}</strong><span class="muted">${escapeHtml(
+          badge.description
+        )}</span>`;
       document.body.appendChild(notif);
       setTimeout(() => {
         notif.style.animation = "slideOutRight 0.3s";
@@ -809,45 +883,38 @@ function renderModules() {
     card.setAttribute("aria-label", `${mod.title} module, ${p}% complete`);
 
     card.innerHTML = `
-          ${
-            isComplete
-              ? '<span class="badge" aria-label="Completed">✓</span>'
-              : ""
-          }
-          <div style="display:flex;gap:12px;align-items:flex-start;">
-            <div class="icon" aria-hidden="true">${getIcon(mod.icon)}</div>
-            <div style="flex:1;">
-              <h3>${escapeHtml(mod.title)}</h3>
-              <p>${escapeHtml(mod.description)}</p>
-              <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap;">
-                <span class="difficulty">${escapeHtml(mod.difficulty)}</span>
-                <span class="time-estimate" aria-label="Estimated time ${
-                  mod.estimatedTime
-                }">
-                  ⏱️ ${escapeHtml(mod.estimatedTime)}
-                </span>
-              </div>
-            </div>
-          </div>
+  ${isComplete ? '<span class="badge" aria-label="Completed">✓</span>' : ""}
 
-          <div class="progress-row" style="margin-top:12px;">
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Module progress ${p}%">
-              <div class="progress-fill" style="width:${p}%;"></div>
-            </div>
-            <div class="progress-text">${p}%</div>
-          </div>
+  <div class="module-header" style="display:flex;gap:12px;align-items:flex-start;">
+    <div class="icon" aria-hidden="true">${getIcon(mod.icon)}</div>
+    <div style="flex:1;">
+      <h3>${escapeHtml(mod.title)}</h3>
+      <p>${escapeHtml(mod.description)}</p>
+      <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap;">
+        <span class="difficulty">${escapeHtml(mod.difficulty)}</span>
+      </div>
+    </div>
+  </div>
 
-          <div style="display:flex;gap:8px;margin-top:12px;">
-            <button class="ghost" data-open="${mod.id}" aria-label="View ${
-      mod.title
-    } details">View Details</button>
-            <button class="btn" data-complete="${mod.id}" ${
-      isComplete ? "disabled" : ""
-    } aria-label="${isComplete ? "Module completed" : "Mark module complete"}">
-              ${isComplete ? "✓ Completed" : "Mark Complete"}
-            </button>
-          </div>
-        `;
+  <div class="module-footer">
+    <div class="progress-row" style="margin-top:12px; display:flex; align-items:center; gap:8px;">
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Module progress ${p}%">
+        <div class="progress-fill" style="width:${p}%;"></div>
+      </div>
+      <div class="progress-text">${p}%</div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:12px;">
+      <button class="ghost" data-open="${mod.id}" aria-label="View ${mod.title} details">View Details</button>
+      <button class="btn" data-complete="${mod.id}" ${isComplete ? "disabled" : ""}
+        aria-label="${isComplete ? "Module completed" : "Mark module complete"}">
+        ${isComplete ? "✓ Completed" : "Mark Complete"}
+      </button>
+    </div>
+  </div>
+`;
+
+
     grid.appendChild(card);
   });
 
@@ -888,53 +955,54 @@ function openModal(moduleId) {
         
         <div style="margin-top:18px;">
           <h3 style="font-size:1.1rem;margin-bottom:12px;">Course Sections</h3>
-          ${
-            Array.isArray(mod.sections) && mod.sections.length
-              ? mod.sections
-                  .map(
-                    (s, idx) => `
+          ${Array.isArray(mod.sections) && mod.sections.length
+      ? mod.sections
+        .map(
+          (s, idx) => `
             <section style="margin-bottom:16px; padding:14px; background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border-radius:10px; border:1px solid var(--glass-border);">
               <h4 style="margin:0 0 8px 0;font-weight:700;font-size:1rem;">
                 ${idx + 1}. ${escapeHtml(s.title || "Section")}
-                ${
-                  s.time
-                    ? `<span class="muted" style="font-weight:400;font-size:0.9rem;"> • ${escapeHtml(
-                        s.time
-                      )}</span>`
-                    : ""
-                }
+                ${s.time
+              ? `<span class="muted" style="font-weight:400;font-size:0.9rem;"> • ${escapeHtml(
+                s.time
+              )}</span>`
+              : ""
+            }
               </h4>
-              ${
-                s.objectives
-                  ? '<ul class="muted" style="margin:8px 0;padding-left:20px;">' +
-                    s.objectives
-                      .map(
-                        (o) => `<li style="margin:4px 0;">${escapeHtml(o)}</li>`
-                      )
-                      .join("") +
-                    "</ul>"
-                  : ""
-              }
+${s.objectives
+              ? '<ul class="muted" style="margin:8px 0;padding-left:20px;">' +
+              s.objectives
+                .map((o) => `<li style="margin:4px 0;">${escapeHtml(o)}</li>`)
+                .join("") +
+              "</ul>"
+              : ""
+            }
+${s.content
+              ? `<div class="lesson-text" style="margin-top:10px;line-height:1.6;color:var(--text-color);">
+         ${s.content}
+       </div>`
+              : ""
+            }
+
             </section>
           `
-                  )
-                  .join("")
-              : `<div class="muted">No detailed content available for this module yet.</div>`
-          }
+        )
+        .join("")
+      : `<div class="muted">No detailed content available for this module yet.</div>`
+    }
         </div>
 
         <div style="margin-top:18px;padding:14px;background:rgba(37,99,235,0.05);border-radius:10px;border:1px solid var(--glass-border);">
           <strong>Progress:</strong> ${prog} of ${total} sections completed (${percent(
-    prog,
-    total
-  )}%)
+      prog,
+      total
+    )}%)
         </div>
 
         <div style="margin-top:18px;display:flex;gap:10px;justify-content:flex-end;">
           <button class="ghost" id="modalCloseBtn">Close</button>
-          <button class="btn" id="modalAddProgress" ${
-            prog >= total ? "disabled" : ""
-          }>
+          <button class="btn" id="modalAddProgress" ${prog >= total ? "disabled" : ""
+    }>
             ${prog >= total ? "✓ Completed" : "Mark as Complete"}
           </button>
         </div>
@@ -995,86 +1063,98 @@ modal.addEventListener("click", (e) => {
 /************************************************************************
  * Quiz Rendering with Retake
  ************************************************************************/
-
 function renderQuizzes() {
   const container = $("#quizContainer");
   container.innerHTML = "";
 
   QUIZZES.forEach((quiz) => {
     const quizDiv = document.createElement("div");
+    quizDiv.classList.add("quiz-card");
     quizDiv.style.marginBottom = "24px";
 
-    // Calculate score
-    let correct = 0,
-      answered = 0;
-    quiz.questions.forEach((q, idx) => {
-      const key = `${quiz.id}-${idx}`;
-      if (appState.quizAnswers[key] !== undefined) {
-        answered++;
-        if (appState.quizAnswers[key] === q.correct) correct++;
-      }
-    });
-    const allAnswered = answered === quiz.questions.length;
-    const score = allAnswered
-      ? Math.round((correct / quiz.questions.length) * 100)
-      : 0;
+    // Header with toggle button
+    const isOpen = quiz.open || false;
+    let headerHTML = `
+      <div class="quiz-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <h3>${escapeHtml(quiz.title)}</h3>
+        <button class="ghost" data-toggle="${quiz.id}" aria-label="${isOpen ? 'Collapse quiz' : 'Expand quiz'}">
+          ${isOpen ? "▼" : "▶"}
+        </button>
+      </div>
+    `;
 
-    let quizHTML = `
-          <h3 style="margin-bottom:16px;">${escapeHtml(quiz.title)}</h3>
-          ${
-            allAnswered
-              ? `
-            <div class="quiz-score">
-              <strong>Your Score: ${score}%</strong> (${correct}/${quiz.questions.length} correct)
-              <button class="ghost" data-retake="${quiz.id}" style="margin-left:12px;">🔄 Retake Quiz</button>
-            </div>
-          `
-              : ""
-          }
+    // Body HTML (questions + score) if expanded
+    let bodyHTML = "";
+    if (isOpen) {
+      // Calculate score
+      let correct = 0,
+        answered = 0;
+      quiz.questions.forEach((q, idx) => {
+        const key = `${quiz.id}-${idx}`;
+        if (appState.quizAnswers[key] !== undefined) {
+          answered++;
+          if (appState.quizAnswers[key] === q.correct) correct++;
+        }
+      });
+      const allAnswered = answered === quiz.questions.length;
+      const score = allAnswered ? Math.round((correct / quiz.questions.length) * 100) : 0;
+
+      // Score section
+      if (allAnswered) {
+        bodyHTML += `
+          <div class="quiz-score">
+            <strong>Your Score: ${score}%</strong> (${correct}/${quiz.questions.length} correct)
+            <button class="ghost" data-retake="${quiz.id}" style="margin-left:12px;"> Retake Quiz</button>
+          </div>
         `;
+      }
 
-    quiz.questions.forEach((q, qIdx) => {
-      const answeredIdx = appState.quizAnswers[`${quiz.id}-${qIdx}`];
-      const isAnswered = answeredIdx !== undefined;
-      const isCorrect = answeredIdx === q.correct;
+      // Questions
+      quiz.questions.forEach((q, qIdx) => {
+        const answeredIdx = appState.quizAnswers[`${quiz.id}-${qIdx}`];
+        const isAnswered = answeredIdx !== undefined;
+        const isCorrect = answeredIdx === q.correct;
 
-      quizHTML += `
-            <div class="quiz-question">
-              <strong>${qIdx + 1}. ${escapeHtml(q.question)}</strong>
-              <div class="quiz-options">
-                ${q.options
-                  .map((opt, optIdx) => {
-                    let optClass = "quiz-option";
-                    if (isAnswered) {
-                      if (optIdx === q.correct) optClass += " correct";
-                      else if (optIdx === answeredIdx) optClass += " incorrect";
-                    }
-                    return `<div class="${optClass}" data-quiz="${
-                      quiz.id
-                    }" data-question="${qIdx}" data-option="${optIdx}" style="${
-                      isAnswered ? "cursor:default;" : ""
-                    }">${escapeHtml(opt)}</div>`;
-                  })
-                  .join("")}
-              </div>
-              ${
-                isAnswered
-                  ? `
-                <div class="quiz-result ${isCorrect ? "correct" : "incorrect"}">
-                  ${isCorrect ? "✓ Correct!" : "✗ Incorrect"} ${escapeHtml(
-                      q.explanation
-                    )}
-                </div>
-              `
-                  : ""
-              }
+        bodyHTML += `
+          <div class="quiz-question">
+            <strong>${qIdx + 1}. ${escapeHtml(q.question)}</strong>
+            <div class="quiz-options">
+              ${q.options
+                .map((opt, optIdx) => {
+                  let optClass = "quiz-option";
+                  if (isAnswered) {
+                    if (optIdx === q.correct) optClass += " correct";
+                    else if (optIdx === answeredIdx) optClass += " incorrect";
+                  }
+                  return `<div class="${optClass}" data-quiz="${quiz.id}" data-question="${qIdx}" data-option="${optIdx}" style="${isAnswered ? "cursor:default;" : ""}">${escapeHtml(opt)}</div>`;
+                })
+                .join("")}
             </div>
-          `;
-    });
+            ${isAnswered
+              ? `<div class="quiz-result ${isCorrect ? "correct" : "incorrect"}">
+                  ${isCorrect ? "✓ Correct!" : "✗ Incorrect"} ${escapeHtml(q.explanation)}
+                </div>`
+              : ""}
+          </div>
+        `;
+      });
+    }
 
-    quizDiv.innerHTML = quizHTML;
+    quizDiv.innerHTML = headerHTML + `<div class="quiz-body">${bodyHTML}</div>`;
     container.appendChild(quizDiv);
   });
+
+  // Toggle expand/collapse
+  qs("[data-toggle]").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      const quizId = e.currentTarget.dataset.toggle;
+      QUIZZES.forEach((q) => {
+        if (q.id === quizId) q.open = !q.open;
+        else q.open = false; // optional: close others when opening one
+      });
+      renderQuizzes();
+    })
+  );
 
   // Quiz answer listeners
   qs(".quiz-option").forEach((opt) => {
@@ -1120,7 +1200,7 @@ function renderTools() {
   container.innerHTML = `
         <!-- Password Strength Tester -->
         <div class="tool-card">
-          <h3>🔐 Password Strength Tester</h3>
+          <h3> Password Strength Tester</h3>
           <p class="muted">Test the strength of your passwords in real-time.</p>
           <input type="text" id="passwordInput" class="tool-input" placeholder="Enter a password to test..." aria-label="Password to test">
           <div id="passwordStrength" class="tool-output" style="display:none;"></div>
@@ -1129,7 +1209,7 @@ function renderTools() {
 
         <!-- Phishing Email Simulator -->
         <div class="tool-card">
-          <h3>🎣 Phishing Email Detector</h3>
+          <h3> Phishing Email Detector</h3>
           <p class="muted">Practice identifying phishing attempts. Click the red flags to reveal them!</p>
           <div class="phishing-email" id="phishingEmail1">
             <div style="margin-bottom:12px;"><strong>From:</strong> <span class="red-flag" title="Suspicious domain">security@paypa1-verify.com</span></div>
@@ -1147,7 +1227,7 @@ function renderTools() {
           </div>
           <button class="btn" id="revealPhishing" style="margin-top:12px;">Reveal All Red Flags</button>
           <div id="phishingExplanation" style="display:none;margin-top:12px;padding:14px;background:rgba(239,68,68,0.1);border-radius:8px;border:1px solid var(--danger);">
-            <strong>🚩 Red Flags Identified:</strong>
+            <strong> Red Flags Identified:</strong>
             <ul style="margin:8px 0;padding-left:20px;line-height:1.6;">
               <li>Misspelled domain (paypa1 vs paypal)</li>
               <li>Creates false urgency and fear</li>
@@ -1161,7 +1241,7 @@ function renderTools() {
 
         <!-- 2FA Setup Simulator -->
         <div class="tool-card">
-          <h3>🛡️ Two-Factor Authentication Demo</h3>
+          <h3> Two-Factor Authentication Demo</h3>
           <p class="muted">Experience how 2FA protects your accounts.</p>
           <div style="padding:16px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--glass-border);">
             <div style="margin-bottom:16px;">
@@ -1245,7 +1325,7 @@ function renderTools() {
     flag.addEventListener("click", function () {
       this.style.background = "rgba(239,68,68,0.25)";
       this.style.outline = "2px solid var(--danger)";
-      alert(`🚩 Red Flag: ${this.getAttribute("title")}`);
+      alert(` Red Flag: ${this.getAttribute("title")}`);
     });
   });
 
@@ -1277,7 +1357,7 @@ function renderTools() {
 }
 
 /************************************************************************
- * Glossary Rendering
+ * 🔐sary Rendering
  ************************************************************************/
 
 function renderGlossary() {
@@ -1303,30 +1383,29 @@ function renderResources() {
     (resource) => `
         <div class="resource-card">
           <h3 style="margin:0 0 8px 0;font-size:1.1rem;">${escapeHtml(
-            resource.title
-          )}</h3>
+      resource.title
+    )}</h3>
           <p class="muted" style="margin:0 0 12px 0;">${escapeHtml(
-            resource.description
-          )}</p>
+      resource.description
+    )}</p>
           <ul class="muted" style="margin:0;padding-left:20px;">
             ${resource.links
-              .map(
-                (link) => `
+        .map(
+          (link) => `
               <li style="margin:6px 0;">
-                ${
-                  link.url
-                    ? `<a href="${escapeHtml(
-                        link.url
-                      )}" target="_blank" rel="noopener noreferrer" class="resource-link">${escapeHtml(
-                        link.name
-                      )}</a>`
-                    : `<strong>${escapeHtml(link.name)}</strong>`
-                }
+                ${link.url
+              ? `<a href="${escapeHtml(
+                link.url
+              )}" target="_blank" rel="noopener noreferrer" class="resource-link">${escapeHtml(
+                link.name
+              )}</a>`
+              : `<strong>${escapeHtml(link.name)}</strong>`
+            }
                 — ${escapeHtml(link.desc)}
               </li>
             `
-              )
-              .join("")}
+        )
+        .join("")}
           </ul>
         </div>
       `
@@ -1343,19 +1422,18 @@ function renderAchievements() {
   const html = `
         <div class="badges-grid">
           ${ACHIEVEMENTS.map((ach) => {
-            const earned = appState.badges.includes(ach.id);
-            return `
-              <div class="badge-item ${
-                earned ? "earned" : "locked"
-              }" aria-label="${earned ? "Earned" : "Locked"}: ${ach.name}">
+    const earned = appState.badges.includes(ach.id);
+    return `
+              <div class="badge-item ${earned ? "earned" : "locked"
+      }" aria-label="${earned ? "Earned" : "Locked"}: ${ach.name}">
                 <span class="badge-icon">${ach.icon}</span>
                 <div class="badge-name">${escapeHtml(ach.name)}</div>
                 <div class="muted" style="font-size:0.75rem;margin-top:4px;">${escapeHtml(
-                  ach.description
-                )}</div>
+        ach.description
+      )}</div>
               </div>
             `;
-          }).join("")}
+  }).join("")}
         </div>
       `;
   container.innerHTML = html;
@@ -1420,11 +1498,10 @@ function updateProgressView() {
             <div style="margin-top:16px;">
               <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
                 <span>Quiz Accuracy</span>
-                <strong>${
-                  quizzesCompleted > 0
-                    ? percent(quizzesCorrect, quizzesCompleted)
-                    : 0
-                }%</strong>
+                <strong>${quizzesCompleted > 0
+      ? percent(quizzesCorrect, quizzesCompleted)
+      : 0
+    }%</strong>
               </div>
             </div>
           </div>
@@ -1432,10 +1509,10 @@ function updateProgressView() {
           <div class="resource-card">
             <h3 style="margin:0 0 12px 0;">Module Details</h3>
             ${MODULES.map((m) => {
-              const prog = appState.progress[m.id] || 0;
-              const total = m.progress.total;
-              const p = percent(prog, total);
-              return `
+      const prog = appState.progress[m.id] || 0;
+      const total = m.progress.total;
+      const p = percent(prog, total);
+      return `
                 <div style="margin-bottom:12px;">
                   <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
                     <span>${escapeHtml(m.title)}</span>
@@ -1446,16 +1523,15 @@ function updateProgressView() {
                   </div>
                 </div>
               `;
-            }).join("")}
+    }).join("")}
           </div>
 
-          ${
-            allComplete
-              ? `
+          ${allComplete
+      ? `
             <div id="certificateContainer"></div>
           `
-              : ""
-          }
+      : ""
+    }
         </div>
       `;
 
@@ -1589,9 +1665,8 @@ $("#exportProgress").addEventListener("click", () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `cybersecurity-progress-${
-    new Date().toISOString().split("T")[0]
-  }.json`;
+  a.download = `cybersecurity-progress-${new Date().toISOString().split("T")[0]
+    }.json`;
   a.click();
   URL.revokeObjectURL(url);
 });

@@ -1,261 +1,204 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cybersecurity Awareness — Modern Dashboard</title>
-    <link rel="icon" href="Assets/favicon.ico" type="image/x-icon" />
-    <!-- Styles -->
-    <link href="styles.css" rel="stylesheet" />
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <section class="splash">
-      <!-- Optional logo -->
-      <div class="splash-logo">
-        <img src="Assets/logo-White.png" alt="Logo" />
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cybersecurity Awareness — Modern Dashboard</title>
+  <link rel="icon" href="Assets/favicon.ico" type="image/x-icon" />
+  <!-- Styles -->
+  <link href="styles.css" rel="stylesheet" />
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-      <!-- Overlay with content -->
-      <div class="overlay">
-        <div class="content">
-          <h1 class="headline">
-            <span class="highlight">Secure</span> your digital world, free your
-            real one.
-          </h1>
-          <p style="color: #fff; margin-bottom: 2rem"></p>
+</head>
 
-          <!-- Buttons -->
-          <div class="splash-buttons">
-            <a
-              onclick="scrollToLearn()"
-              href="#Start-Learning"
-              class="splash-btn primary"
-              >Get Started</a
-            >
+<body>
+  <section class="splash">
+    <!-- Optional logo -->
+    <div class="splash-logo">
+      <img src="Assets/logo-White.png" alt="Logo" />
+    </div>
 
-            <a href="https://cappel.li" class="splash-btn secondary"
-              >About me</a
-            >
-          </div>
+    <!-- Overlay with content -->
+    <div class="overlay">
+      <div class="content">
+        <h1 class="headline">
+          <span class="highlight">Secure</span> your digital world, free your
+          real one.
+        </h1>
+        <p style="color: #fff; margin-bottom: 2rem"></p>
+
+        <!-- Buttons -->
+        <div class="splash-buttons">
+          <a onclick="scrollToLearn()" href="#Start-Learning" class="splash-btn primary">Get Started</a>
+
+          <a href="https://cappel.li" class="splash-btn secondary">About me</a>
         </div>
       </div>
-    </section>
-    <div class="page" id="app">
-      <header class="site" role="banner" aria-label="Dashboard header">
-        <div class="brand">
-          <div class="title"></div>
-        </div>
-        <div class="controls" role="navigation" aria-label="Primary controls">
-          <button
-            style="display: none"
-            id="themeToggle"
-            class="btn"
-            title="Toggle theme"
-            aria-label="Toggle dark/light theme"
-          >
-            Toggle theme
-          </button>
-          <button
-            id="downloadCert"
-            class="ghost"
-            title="Download Certificate"
-            style="display: none"
-            aria-label="Download completion certificate"
-          >
-            📜 Certificate
-          </button>
-          <button
-            id="exportProgress"
-            class="ghost"
-            title="Export Progress"
-            aria-label="Export progress as PDF"
-          >
-            💾 Export
-          </button>
-          <button
-            id="refreshBtn"
-            class="ghost"
-            title="Reset progress"
-            aria-label="Reset all progress"
-          >
-            🔄 Reset
-          </button>
-        </div>
-      </header>
-      <!-- Quick Stats Widget -->
-      <div class="stats-widget" id="statsWidget">
-        <!-- Populated by JS -->
+    </div>
+  </section>
+  <div class="page" id="app">
+    <header class="site" role="banner" aria-label="Dashboard header">
+      <div class="brand">
+        <div class="title"></div>
       </div>
-      <main class="layout" role="main">
-        <!-- Sidebar nav -->
-        <nav class="sidebar" aria-label="Sections" id="sidebarNav">
-          <ul>
-            <li>
-              <a href="#modules" class="active" data-section="modules"
-                >📚 Modules</a
-              >
-            </li>
-            <li><a href="#quizzes" data-section="quizzes">✅ Quizzes</a></li>
-            <li><a href="#tools" data-section="tools">🔧 Tools</a></li>
-            <li><a href="#glossary" data-section="glossary">📖 Glossary</a></li>
-            <li>
-              <a href="#resources" data-section="resources">🔗 Resources</a>
-            </li>
-            <li>
-              <a href="#achievements" data-section="achievements"
-                >🏆 Achievements</a
-              >
-            </li>
-            <li><a href="#progress" data-section="progress">📊 Progress</a></li>
-          </ul>
-        </nav>
-        <!-- Main content -->
-        <div class="main-card">
-          <!-- Modules Section -->
-          <section
-            id="modulesSection"
-            class="section-content active"
-            aria-labelledby="modulesHeading"
-          >
-            <h2 id="modulesHeading">Learning Modules</h2>
-            <p class="muted" style="margin-top: 6px">
-              Complete short modules to strengthen security habits.
-            </p>
-            <div id="modulesArea" style="margin-top: 18px">
-              <div
-                id="modulesGrid"
-                class="modules-grid"
-                aria-live="polite"
-                aria-busy="false"
-              ></div>
-            </div>
-          </section>
-          <!-- Quizzes Section -->
-          <section
-            id="quizzesSection"
-            class="section-content"
-            aria-labelledby="quizzesHeading"
-          >
-            <h2 id="quizzesHeading">Interactive Quizzes</h2>
-            <p class="muted" style="margin-top: 6px">
-              Test your cybersecurity knowledge.
-            </p>
-            <div id="quizContainer" class="quiz-container"></div>
-          </section>
-          <!-- Tools Section -->
-          <section
-            id="toolsSection"
-            class="section-content"
-            aria-labelledby="toolsHeading"
-          >
-            <h2 id="toolsHeading">Security Tools & Simulators</h2>
-            <p class="muted" style="margin-top: 6px">
-              Practice with interactive security tools.
-            </p>
-            <div id="toolsContainer" style="margin-top: 18px"></div>
-          </section>
-          <!-- Glossary Section -->
-          <section
-            id="glossarySection"
-            class="section-content"
-            aria-labelledby="glossaryHeading"
-          >
-            <h2 id="glossaryHeading">Cybersecurity Glossary</h2>
-            <p class="muted" style="margin-top: 6px">
-              Essential security terminology explained.
-            </p>
-            <div id="glossaryContainer" style="margin-top: 18px"></div>
-          </section>
-          <!-- Resources Section -->
-          <section
-            id="resourcesSection"
-            class="section-content"
-            aria-labelledby="resourcesHeading"
-          >
-            <h2 id="resourcesHeading">Security Resources</h2>
-            <p class="muted" style="margin-top: 6px">
-              Essential tools and guides for staying secure online.
-            </p>
-            <div id="resourcesContainer" style="margin-top: 18px"></div>
-          </section>
-          <!-- Achievements Section -->
-          <section
-            id="achievementsSection"
-            class="section-content"
-            aria-labelledby="achievementsHeading"
-          >
-            <h2 id="achievementsHeading">Achievements & Badges</h2>
-            <p class="muted" style="margin-top: 6px">
-              Earn badges as you progress through your learning journey.
-            </p>
-            <div id="achievementsContainer" style="margin-top: 18px"></div>
-          </section>
-          <!-- Progress Section -->
-          <section
-            id="progressSection"
-            class="section-content"
-            aria-labelledby="progressHeading"
-          >
-            <h2 id="progressHeading">Your Progress</h2>
-            <p class="muted" style="margin-top: 6px">
-              Track your cybersecurity learning journey.
-            </p>
-            <div id="progressContainer" style="margin-top: 18px"></div>
-          </section>
-        </div>
-      </main>
-      <div class="footer-div">
-        <ul class="footer-ul">
-          <li class="footer-li">
-            <a>© 2025 Andrew Cappelli </a>
-            <a
-              target="_blank"
-              class="footer-a"
-              href="mailto:AndrewCappelli13@gmail.com"
-              >• Email </a
-            ><a
-              target="_blank"
-              class="footer-a"
-              href="https://www.linkedin.com/in/andrew-cappelli/"
-              >• Linked-In </a
-            ><a
-              target="_blank"
-              class="footer-a"
-              href="https://github.com/Andrew-most-likely/"
-              >• Github
+      <div class="controls" role="navigation" aria-label="Primary controls">
+        <button style="display: none" id="themeToggle" class="btn" title="Toggle theme"
+          aria-label="Toggle dark/light theme">
+          Toggle theme
+        </button>
+        <button style="display: none" id="downloadCert" class="ghost" title="Download Certificate" style="display: none"
+          aria-label="Download completion certificate">
+          📜 Certificate
+        </button>
+        <button style="display: none" id="exportProgress" class="ghost" title="Export Progress" aria-label="Export progress as PDF">
+          💾 Export
+        </button>
+        <button style="display: none" id="refreshBtn" class="ghost" title="Reset progress" aria-label="Reset all progress">
+          🔄 Reset
+        </button>
+      </div>
+    </header>
+    <!-- Quick Stats Widget -->
+    <div class="stats-widget" id="statsWidget">
+      <!-- Populated by JS -->
+    </div>
+    <main class="layout" role="main">
+      <!-- Sidebar nav -->
+      <nav class="sidebar" aria-label="Sections" id="sidebarNav">
+        <ul>
+          <li>
+            <a href="#modules" class="active" data-section="modules">
+              <i class="fas fa-book"></i> Modules
             </a>
           </li>
-          <li class="footer-li">
-            <p>👋</p>
+          <li>
+            <a href="#quizzes" data-section="quizzes">
+              <i class="fas fa-check"></i> Quizzes
+            </a>
+          </li>
+          <li>
+            <a href="#tools" data-section="tools">
+              <i class="fas fa-wrench"></i> Tools
+            </a>
+          </li>
+          <li>
+            <a href="#glossary" data-section="glossary">
+              <i class="fas fa-book-open"></i> Glossary
+            </a>
+          </li>
+          <li>
+            <a href="#resources" data-section="resources">
+              <i class="fas fa-link"></i> Resources
+            </a>
+          </li>
+          <li>
+            <a href="#achievements" data-section="achievements">
+              <i class="fas fa-trophy"></i> Achievements
+            </a>
+          </li>
+          <li>
+            <a href="#progress" data-section="progress">
+              <i class="fas fa-chart-bar"></i> Progress
+            </a>
           </li>
         </ul>
+      </nav>
+
+      <!-- Main content -->
+      <div class="main-card">
+        <!-- Modules Section -->
+        <section id="modulesSection" class="section-content active" aria-labelledby="modulesHeading">
+          <h2 id="modulesHeading">Learning Modules</h2>
+          <p class="muted" style="margin-top: 6px">
+            Complete short modules to strengthen security habits.
+          </p>
+          <div id="modulesArea" style="margin-top: 18px">
+            <div id="modulesGrid" class="modules-grid" aria-live="polite" aria-busy="false"></div>
+          </div>
+        </section>
+        <!-- Quizzes Section -->
+        <section id="quizzesSection" class="section-content" aria-labelledby="quizzesHeading">
+          <h2 id="quizzesHeading">Interactive Quizzes</h2>
+          <p class="muted" style="margin-top: 6px">
+            Test your cybersecurity knowledge.
+          </p>
+          <div id="quizContainer" class="quiz-container"></div>
+        </section>
+        <!-- Tools Section -->
+        <section id="toolsSection" class="section-content" aria-labelledby="toolsHeading">
+          <h2 id="toolsHeading">Security Tools & Simulators</h2>
+          <p class="muted" style="margin-top: 6px">
+            Practice with interactive security tools.
+          </p>
+          <div id="toolsContainer" style="margin-top: 18px"></div>
+        </section>
+        <!-- Glossary Section -->
+        <section id="glossarySection" class="section-content" aria-labelledby="glossaryHeading">
+          <h2 id="glossaryHeading">Cybersecurity Glossary</h2>
+          <p class="muted" style="margin-top: 6px">
+            Essential security terminology explained.
+          </p>
+          <div id="glossaryContainer" style="margin-top: 18px"></div>
+        </section>
+        <!-- Resources Section -->
+        <section id="resourcesSection" class="section-content" aria-labelledby="resourcesHeading">
+          <h2 id="resourcesHeading">Security Resources</h2>
+          <p class="muted" style="margin-top: 6px">
+            Essential tools and guides for staying secure online.
+          </p>
+          <div id="resourcesContainer" style="margin-top: 18px"></div>
+        </section>
+        <!-- Achievements Section -->
+        <section id="achievementsSection" class="section-content" aria-labelledby="achievementsHeading">
+          <h2 id="achievementsHeading">Achievements & Badges</h2>
+          <p class="muted" style="margin-top: 6px">
+            Earn badges as you progress through your learning journey.
+          </p>
+          <div id="achievementsContainer" style="margin-top: 18px"></div>
+        </section>
+        <!-- Progress Section -->
+        <section id="progressSection" class="section-content" aria-labelledby="progressHeading">
+          <h2 id="progressHeading">Your Progress</h2>
+          <p class="muted" style="margin-top: 6px">
+            Track your cybersecurity learning journey.
+          </p>
+          <div id="progressContainer" style="margin-top: 18px"></div>
+        </section>
       </div>
+    </main>
+    <div class="footer-div">
+      <ul class="footer-ul">
+        <li class="footer-li">
+          <a>© 2025 Andrew Cappelli </a>
+          <a target="_blank" class="footer-a" href="mailto:AndrewCappelli13@gmail.com">• Email </a><a target="_blank"
+            class="footer-a" href="https://www.linkedin.com/in/andrew-cappelli/">• Linked-In </a><a target="_blank"
+            class="footer-a" href="https://github.com/Andrew-most-likely/">• Github
+          </a>
+        </li>
+        <li class="footer-li">
+          <p>👋</p>
+        </li>
+      </ul>
     </div>
-    <!-- Modal -->
-    <div
-      id="modal"
-      class="modal"
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-      aria-labelledby="modalTitle"
-    >
-      <div class="dialog" role="document">
-        <button class="close" aria-label="Close" id="modalClose">
-          &times;
-        </button>
-        <div id="modalContent"></div>
-      </div>
+  </div>
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="dialog" role="document">
+      <button class="close" aria-label="Close" id="modalClose">
+        &times;
+      </button>
+      <div id="modalContent"></div>
     </div>
-    <!-- Scripts -->
-    <script src="scripts.js"></script>
-    <!-- github star button-->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+  </div>
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
+  <!-- github star button-->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
 </html>
