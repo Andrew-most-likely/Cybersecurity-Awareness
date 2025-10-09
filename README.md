@@ -11,4 +11,4 @@ A modern, interactive web dashboard designed to teach users essential cybersecur
 This project is perfect for anyone looking to improve their online security awareness or for educators building digital safety curricula. It’s easy to customize, extend, and integrate into learning platforms or personal projects.
 
 ## Dashboard
-<img width="2842" height="1454" alt="mainscreen" src="https://github.com/user-attachments/assets/9f12ad85-cec8-4f93-ae6b-2e2cf5f32be1" />
+<img width="1907" height="976" alt="BG" src="https://github.com/user-attachments/assets/c2f981b7-5e88-4a9c-ac1d-ab1f1e447a8b" />
