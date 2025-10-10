@@ -2715,35 +2715,29 @@ quizzes: QUIZZES.map((q) => {
   const db = getFirestore(app);
 
   // Check authentication state
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      // Not logged in - redirect to login page
-      if (!window.location.pathname.includes('login.html')) {
-        window.location.href = 'login.html';
-      }
-    } else {
-      console.log('User authenticated:', user.email);
-      
-      // Load user's progress from Firestore
-      try {
-        const userRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userRef);
-        
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          if (userData.data) {
-            // Sync Firebase data with local appState
-            syncProgressFromFirebase(userData.data);
-          }
-        }
-      } catch (error) {
-        console.error("Error loading user data:", error);
-      }
+// Check authentication state (only to know who is logged in)
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    console.log('User authenticated:', user.email);
 
-      // Add user info to header
-      updateHeaderWithUser(user);
+    // Load user's progress from Firestore
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        if (userData.data) {
+          syncProgressFromFirebase(userData.data);
+        }
+      }
+    } catch (error) {
+      console.error("Error loading user data:", error);
     }
-  });
+
+    updateHeaderWithUser(user);
+  }
+});
+
 
   // Function to sync Firebase data with local state
   function syncProgressFromFirebase(firebaseData) {
@@ -2904,20 +2898,34 @@ signOutModal.addEventListener('click', e => {
 
   }
 
-  // Override the existing markModuleCompleted function to save to Firebase
   const originalMarkModuleCompleted = window.markModuleCompleted || markModuleCompleted;
   window.markModuleCompleted = async function(id) {
     originalMarkModuleCompleted(id);
     await saveProgressToFirebase();
   };
-
-  // Expose Firebase functions globally
   window.firebaseAuth = {
     saveProgress: saveProgressToFirebase,
     getCurrentUser: () => auth.currentUser
   };
+// Function to handle click and redirect if not logged in
+function requireAuthRedirect(e) {
+  const user = auth.currentUser;
+  if (!user) {
+    e.preventDefault(); // stop the default action
+    window.location.href = 'login.html';
+  }
+  // else, logged-in users proceed normally
+}
 
+// Attach to all buttons
+document.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', requireAuthRedirect);
+});
 
+// Attach to all links
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', requireAuthRedirect);
+});
 
 </script>
   </body>
