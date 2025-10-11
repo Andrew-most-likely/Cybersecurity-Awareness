@@ -38,7 +38,7 @@
         --accent: #5865f2;
         --accent-2: #4752c4;
         --muted: #b5bac1;
-        --card-bg: rgba(43, 45, 49, 0.8);
+        --card-bg: rgba(43, 45, 49);
         --glass-border: rgba(255, 255, 255, 0.06);
         --text: #f2f3f5;
         --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
@@ -959,7 +959,7 @@
       }
       .footer-a {
         color: var(--muted);
-        text-decoration: none;
+
       }
 
       .footer-div {
@@ -1089,6 +1089,60 @@
     .google-btn:hover {
       background: #f0f0f0;
     }
+      /* Overlay */
+  #footerModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+ #footerModalContent {
+  background: rgba(43, 45, 49);
+  backdrop-filter: blur(var(--glass-blur)px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 25px 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+/* Close Button */
+#footerModalClose {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+#footerModalClose:hover {
+  color: var(--accent-2);
+}
+
+#footerModalContent h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+#footerModalContent a {
+  color: var(--accent-2);
+}
+
+#footerModalContent a:hover {
+  text-decoration: underline;
+}
     </style>
   </head>
   <body>
@@ -1297,33 +1351,27 @@
   </div>
 </div>
 
+<div class="footer-div">
+  <ul class="footer-ul">
+    <li class="footer-li">
+      © 2025 Andrew Cappelli
+      • <a href="#" class="footer-a" data-modal="tos">Terms of Service</a> 
+      • <a href="#" class="footer-a" data-modal="privacy">Privacy Policy</a>
+      • <a target="_blank" class="footer-a" href="https://www.linkedin.com/in/andrew-cappelli/">Linked-In</a>
+      • <a target="_blank" class="footer-a" href="https://github.com/Andrew-most-likely/">Github</a>
+    </li>
+  </ul>
+</div>
 
-      <div class="footer-div">
-        <ul class="footer-ul">
-          <li class="footer-li">
-            © 2025 Andrew Cappelli
-            <a
-              target="_blank"
-              class="footer-a"
-              href="mailto:AndrewCappelli13@gmail.com"
-              >• Email </a
-            ><a
-              target="_blank"
-              class="footer-a"
-              href="https://www.linkedin.com/in/andrew-cappelli/"
-              >• Linked-In </a
-            ><a
-              target="_blank"
-              class="footer-a"
-              href="https://github.com/Andrew-most-likely/"
-              >• Github
-            </a>
-          </li>
-          <li class="footer-li"></li>
-        </ul>
-      </div>
-    </div>
-    <div
+<!-- Footer Modal (outside footer) -->
+<div id="footerModalOverlay" style="display:none;">
+  <div id="footerModalContent">
+    <span id="footerModalClose">&times;</span>
+    <h2 id="footerModalTitle"></h2>
+    <div id="footerModalText"></div>
+  </div>
+</div>
+<div
       id="modal"
       class="modal"
       role="dialog"
@@ -1338,6 +1386,7 @@
         <div id="modalContent"></div>
       </div>
     </div>
+
 
 
     <script>
@@ -2131,7 +2180,7 @@ function markModuleCompleted(id) {
             ? mod.sections
                 .map(
                   (s, idx) =>
-                    `<section style="margin-bottom:16px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);border-radius:10px;border:1px solid var(--glass-border);"><h4 style="margin:0 0 8px 0;font-weight:700;font-size:1rem;">${
+                    `<section style="margin-bottom:16px;padding:14px;, transparent);border-radius:10px;border:1px solid var(--glass-border);"><h4 style="margin:0 0 8px 0;font-weight:700;font-size:1rem;">${
                       idx + 1
                     }. ${escapeHtml(s.title || "Section")}${
                       s.time
@@ -2942,6 +2991,58 @@ document.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', requireAuthRedirect);
 });
 
+const footerModalOverlay = document.getElementById('footerModalOverlay');
+const footerModalTitle = document.getElementById('footerModalTitle');
+const footerModalText = document.getElementById('footerModalText');
+const footerModalClose = document.getElementById('footerModalClose');
+
+document.querySelectorAll('a[data-modal]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const type = link.getAttribute('data-modal');
+
+    if (type === 'tos') {
+      footerModalTitle.textContent = 'Terms of Service';
+      footerModalText.innerHTML = `
+        <h3>Effective Date: October 10, 2025</h3>
+        <ol>
+          <li><strong>Acceptance of Terms:</strong> By accessing or using LearnCyberSafety (the “Site”), you agree to be bound by these Terms of Service and all applicable laws.</li>
+          <li><strong>Use of Site:</strong> You may use the Site for personal, non-commercial purposes only. You agree not to attempt unauthorized access, introduce malware, or use the Site for illegal activities.</li>
+          <li><strong>Account Registration:</strong> You are responsible for maintaining the confidentiality of your login information and all activities under your account.</li>
+          <li><strong>User Content:</strong> You retain ownership of content you submit but grant LearnCyberSafety a license to use it for educational purposes on the Site.</li>
+          <li><strong>Prohibited Conduct:</strong> Do not impersonate others, circumvent security, or harass others using the Site.</li>
+          <li><strong>Disclaimers:</strong> The Site is provided "as is." LearnCyberSafety does not guarantee accuracy, reliability, or uninterrupted access.</li>
+          <li><strong>Limitation of Liability:</strong> LearnCyberSafety is not liable for damages arising from your use of the Site.</li>
+          <li><strong>Modifications:</strong> We may update these Terms at any time. Continued use constitutes acceptance of changes.</li>
+          <li><strong>Contact:</strong> For questions, contact us at <a href="mailto:andrewcappelli13@gmail.com">andrewcappelli13@gmail.com</a>.</li>
+        </ol>
+      `;
+    } else if (type === 'privacy') {
+      footerModalTitle.textContent = 'Privacy Policy';
+      footerModalText.innerHTML = `
+        <h3>Effective Date: October 10, 2025</h3>
+        <ol>
+          <li><strong>Information We Collect:</strong> We may collect email addresses for accounts, anonymous usage data, and feedback or content you submit.</li>
+          <li><strong>How We Use Information:</strong> To provide Site functionality, send account-related emails, and improve user experience.</li>
+          <li><strong>Data Sharing:</strong> We do not sell personal information. Data may be shared with service providers to operate the Site.</li>
+          <li><strong>Cookies & Tracking:</strong> We may use cookies or analytics to understand traffic. No personal info is shared for marketing.</li>
+          <li><strong>Security:</strong> Reasonable measures are in place to protect your data, but no online service is 100% secure.</li>
+          <li><strong>User Rights:</strong> You may request deletion of your account or personal data by contacting <a href="mailto:andrewcappelli13@gmail.com">andrewcappelli13@gmail.com</a>.</li>
+          <li><strong>Third-Party Links:</strong> The Site may contain links to external websites. We are not responsible for their privacy practices.</li>
+          <li><strong>Policy Updates:</strong> Updates may occur periodically. Continued use indicates acceptance.</li>
+        </ol>
+      `;
+    }
+
+    footerModalOverlay.style.display = 'flex';
+  });
+});
+
+// Close modal
+footerModalClose.addEventListener('click', () => footerModalOverlay.style.display = 'none');
+footerModalOverlay.addEventListener('click', e => {
+  if (e.target === footerModalOverlay) footerModalOverlay.style.display = 'none';
+});
 </script>
   </body>
 </html>
