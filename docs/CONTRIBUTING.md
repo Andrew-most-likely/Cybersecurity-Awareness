@@ -24,82 +24,68 @@ Please ensure that your code follows the existing style and includes proper docu
 
 ---
 
-## TODO List & Implementation Guide
+# LearnCyberSafety.org — Vision & Development Roadmap
 
-### Content & Learning
-- [MODULES DATA] Actual lesson content with detailed text/examples
-- [QUIZZES DATA] Add quizzes for Updates, WiFi, Backup modules
-- [NEW SECTION] Interactive simulations (phishing analyzer, password tester) ✅ Implemented
-- [MODULES DATA] Video embeds or tutorial links in sections
-- [MODULES DATA] Real-world case studies in module sections
-- [RESOURCES SECTION] Downloadable checklists functionality
+This roadmap represents a vision for **LearnCyberSafety.org** to become a fully engaging, credible, and user-friendly cybersecurity education platform.
 
-### Functionality & Features
-- [RESOURCES RENDERING] Make resource links clickable external links ✅ Implemented
-- [NEW SECTION] Certificate generation on 100% completion ✅ Implemented
-- [HEADER] Search functionality across modules and resources
-- [MODULE CARDS] Bookmarking/favorites system
-- [MODAL] Notes section for each module
-- [NEW SECTION] Glossary of technical terms ✅ Implemented
-- [PROGRESS SECTION] Reminder system for reviewing materials
+---
 
-### User Experience
-- [BOOT FUNCTION] Onboarding tour for first-time users
-- [CSS MEDIA QUERIES] Better mobile responsiveness ✅ Implemented
-- [EVENT LISTENERS] More keyboard shortcuts
-- [CSS] Print-friendly version styles
-- [SECTION SWITCHING] Loading states and transitions ✅ Implemented
-- [RENDER FUNCTIONS] Better empty states
-- [CSS/HTML] Tooltips for features
+## GitHub & Legal Transparency
+- [ ] **Custom Open License:**  
+  Create a `LICENSE.md` allowing free educational use, requiring attribution, and preventing commercial exploitation without permission.
+- [ ] **Privacy & Terms:**  
+  Include standalone `privacy.html` and `terms.html` pages with clear language for all users.
+- [ ] **Policy Popup:**  
+  Show a first-time modal to inform users about site policies, consent, and responsible use.
+- [ ] **Footer Integration:**  
+  Always-visible links in the footer for Privacy, Terms, and License.
 
-### Gamification
-- [NEW SECTION] Badges/achievements system ✅ Implemented
-- [APP STATE] Streak tracking
-- [APP STATE] Points system
-- [NEW SECTION] Leaderboard (multi-user)
-- [NEW SECTION] Daily challenges
+---
 
-### Data & Analytics
-- [APP STATE] Time tracking per module
-- [QUIZ RENDERING] Quiz retake functionality ✅ Implemented
-- [PROGRESS SECTION] Performance analytics
-- [PROGRESS SECTION] Export progress as PDF ✅ Implemented
-- [MODULES RENDERING] Module recommendations based on performance
+## User Experience (UX)
+- [ ] **Open Exploration:**  
+  Let visitors browse lessons, previews, and modules without signing in, building trust and accessibility.
+- [ ] **Personalized Learning Paths:**  
+  Prompt users to choose their type of education: Everyday Safety, Student, Professional, or Instructor.  
+  Use this to tailor content dynamically.
+- [ ] **Interactive Learning Hub:**  
+  Develop a visually rich dashboard (`learn.html`) with:
+  - Module cards with hover effects and icons  
+  - Progress tracking bars  
+  - “Continue Learning” buttons that restore saved progress  
+  - Consistent theme colors and clean, modern design
 
-### Accessibility
-- [HTML/ARIA] Better screen reader optimization ✅ Implemented
-- [CSS] High contrast mode option
-- [CONTROLS] Font size adjustment controls
-- [EVENT LISTENERS] Enhanced keyboard navigation ✅ Implemented
-- [HTML] More descriptive aria-labels ✅ Implemented
+---
 
-### Content Management
-- [NEW SECTION] Admin mode for editing content
-- [BOOT FUNCTION] Import/export modules from JSON
-- [APP STATE] i18n support for multiple languages
-- [CSS VARIABLES] Custom branding/theming
-- [MODULES DATA] Module versioning with timestamps
+## Certifications & Verification
+- [ ] **PDF Certificates:**  
+  Generate automated, personalized certificates with:
+  - Learner name, course title, completion date  
+  - Unique SHA-256 hash  
+  - QR code linking to verification
+- [ ] **Hash Storage:**  
+  Store certificate hashes securely in Firestore or MySQL for authenticity checks.
+- [ ] **Verification Portal:**  
+  Enable organizers, teachers, or employers to verify certificates quickly via hash or QR code input.
 
-### Advanced Features
-- [APP STATE] Spaced repetition algorithm
-- [QUIZ RENDERING] Adaptive learning based on performance
-- [NEW SECTION] Social features (multi-user)
-- [EXPORT] SCORM compliance for LMS integration
-- [REQUIRES BACKEND] Email notifications
-- [TOOLS SECTION] 2FA training simulator ✅ Implemented
-- [TOOLS SECTION] Password manager demo ✅ Implemented
-- [TOOLS SECTION] Phishing email simulator ✅ Implemented
+---
 
-### Polish & Details
-- [CSS] Enhanced animations and micro-interactions ✅ Implemented
-- [OPTIONAL] Sound effects for actions
-- [PROGRESS SECTION] Confetti animation on completion ✅ Implemented
-- [ERROR HANDLING] Better error handling throughout
-- [BOOT FUNCTION] Session recovery warning
-- [MODULES DATA] Module prerequisites system
-- [MODULE CARDS] Estimated completion time display ✅ Implemented
-- [PROGRESS SECTION] Recently completed section
-- [DASHBOARD] Quick stats widget ✅ Implemented
-- [MODULES DATA] Difficulty indicators ✅ Implemented
-- [MODAL] Related resources suggestions
-- [NEW SECTION] Feedback mechanism for modules
+## Email & Notifications
+- [ ] **Reliable Emails:**  
+  Configure SPF, DKIM, and DMARC to prevent spam issues.
+- [ ] **Onboarding Emails:**  
+  Send a warm welcome and guidance email to new users.
+- [ ] **Password Management:**  
+  Implement a full **Forgot Password** and **Reset Password** flow for all users, with clear UI feedback.
+
+---
+
+## Mission Statement & About Us
+- [ ] **About Page:**  
+  Clearly explain the purpose, vision, and educational goals of LearnCyberSafety.org.
+- [ ] **Mission Statement:**  
+  Provide accessible, practical, and free cybersecurity education to empower users to recognize and prevent online threats.
+- [ ] **Why We Exist:**  
+  Fill the gap in cybersecurity awareness by creating interactive, engaging, and open learning resources for students, professionals, and everyday internet users.
+
+---
