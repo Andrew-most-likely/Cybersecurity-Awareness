@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, updateDoc, setDoc, serverTimestamp  } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -73,85 +73,90 @@ function syncProgressFromFirebase(firebaseData) {
   renderAchievements();
 }
 
-// Function to save progress to Firebase
-async function saveProgressToFirebase() {
+export async function saveProgressToFirebase() {
   const user = auth.currentUser;
   if (!user) return;
 
   try {
     const userRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(userRef);
-    
-    if (docSnap.exists()) {
-      const userData = docSnap.data();
-      
-      // Update modules with current progress
-      const updatedModules = userData.data.modules.map(module => {
-        const localProgress = appState.progress[module.id] || 0;
-        return {
-          ...module,
-          progress: localProgress,
-          percentComplete: Math.round((localProgress / module.total) * 100)
-        };
-      });
 
-      const updatedQuizzes = QUIZZES.map(quiz => {
-        const questions = quiz.questions.map((q, idx) => {
-          const key = `${quiz.id}-${idx}`;
+    // Ensure MODULES and QUIZZES arrays exist
+    if (!Array.isArray(MODULES) || !Array.isArray(QUIZZES)) {
+      console.error("MODULES or QUIZZES not defined");
+      return;
+    }
+
+    const data = {
+      badges: appState.badges || [],
+      exportDate: new Date().toISOString(),
+
+      // ✅ MODULES: make sure total is read correctly
+      modules: MODULES.map(m => {
+        const total = Number(m.total) || 0;
+        const progress = appState.progress?.[m.id] || 0;
+        const percentComplete =
+          total > 0 ? Math.round((progress / total) * 100) : 0;
+
+        return {
+          id: m.id,
+          title: m.title,
+          total,
+          progress,
+          percentComplete,
+        };
+      }),
+
+      // ✅ QUIZZES: maintain nested "questions" format
+      quizzes: QUIZZES.map(q => {
+        const questions = q.questions.map((question, i) => {
+          const key = `${q.id}-${i}`;
           return { userAnswer: appState.quizAnswers[key] ?? null };
         });
 
         const answered = questions.filter(q => q.userAnswer !== null).length;
-        const correct = questions.filter(
-          (q, idx) => q.userAnswer === quiz.questions[idx].correct
-        ).length;
+        const correct = q.questions.reduce((count, question, i) => {
+          const key = `${q.id}-${i}`;
+          const userAnswer = appState.quizAnswers[key];
+          return count + (userAnswer === question.correct ? 1 : 0);
+        }, 0);
 
         return {
-          id: quiz.id,
-          title: quiz.title,
-          total: quiz.questions.length,
+          id: q.id,
+          title: q.title,
+          total: q.questions.length,
           answered,
           correct,
           score: answered ? Math.round((correct / answered) * 100) : 0,
-          questions
+          questions,
         };
-      });
+      }),
 
-      // Calculate summary
-      const completedModules = updatedModules.filter(m => 
-        m.progress >= m.total
-      ).length;
+      // ✅ SUMMARY: accurate completion count
+      summary: {
+        modulesCompleted: MODULES.filter(
+          m => (appState.progress?.[m.id] || 0) >= m.total
+        ).length,
+        totalModules: MODULES.length,
+        badgesEarned: appState.badges?.length || 0,
+        totalBadges: ACHIEVEMENTS?.length || 0,
+      },
 
-      await updateDoc(userRef, {
-        data: {
-          ...userData.data,
-          modules: updatedModules,
-          quizzes: updatedQuizzes,
-          badges: appState.badges,
-          summary: {
-            modulesCompleted: completedModules,
-            totalModules: MODULES.length,
-            badgesEarned: appState.badges.length,
-            totalBadges: ACHIEVEMENTS.length
-          },
-          exportDate: new Date().toISOString()
-        }
-      });
+      // ✅ User info inside `data(map)`
+      email: user.email || "",
+      name: user.displayName || "",
+      lastLogin: serverTimestamp(), // Firestore timestamp
+    };
 
-      console.log('Progress saved to Firebase');
-    }
+    await setDoc(userRef, { data }, { merge: true });
+    console.log("✅ User progress saved in correct format");
   } catch (error) {
-    console.error("Error saving progress:", error);
+    console.error("❌ Error saving progress:", error);
   }
 }
 
-// Auto-save progress every 30 seconds
+
 setInterval(saveProgressToFirebase, 30000);
-
-// Save on page unload
 window.addEventListener('beforeunload', saveProgressToFirebase);
-
-// Update header with user info and sign-out button
 function updateHeaderWithUser(user) {
   const controls = document.querySelector('.controls');
   
