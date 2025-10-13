@@ -633,7 +633,7 @@ function applyTheme(theme) {
   );
   appState.theme = theme;
   $("#themeToggle").textContent =
-    theme === "dark" ? "☀️ Light" : "🌙 Dark";
+    theme === "dark" ? " Light" : " Dark";
 }
 
 (function initTheme() {
@@ -1212,7 +1212,7 @@ function showCertificate() {
     month: "long",
     day: "numeric",
   });
-  container.innerHTML = `<div class="certificate"><h2>🎓 Certificate of Completion</h2><p class="cert-text">This certifies that</p><p class="cert-name">Cybersecurity Champion</p><p class="cert-text">has successfully completed the</p><p class="cert-text" style="font-weight:700;font-size:1.2rem;">Cybersecurity Awareness Training Program</p><p class="cert-text" style="margin-top:20px;">Completed on ${date}</p><p class="muted" style="margin-top:16px;font-size:0.9rem;">${
+  container.innerHTML = `<div class="certificate"><h2> Certificate of Completion</h2><p class="cert-text">This certifies that</p><p class="cert-name">Cybersecurity Champion</p><p class="cert-text">has successfully completed the</p><p class="cert-text" style="font-weight:700;font-size:1.2rem;">Cybersecurity Awareness Training Program</p><p class="cert-text" style="margin-top:20px;">Completed on ${date}</p><p class="muted" style="margin-top:16px;font-size:0.9rem;">${
     MODULES.length
   } modules completed • ${QUIZZES.reduce(
     (acc, q) => acc + q.questions.length,
