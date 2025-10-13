@@ -72,6 +72,7 @@
         <input type="password" id="newPassword" placeholder="New password" required>
         <button id="resetBtn">Reset Password</button>
         <p id="message"></p>
+        <button id="goto-site" style="display:none; margin-top:10px;">Go to Dashboard</button>
       </div>
 
       <!-- Email Verification Card -->
@@ -140,6 +141,31 @@
     } else {
       pageTitle.textContent = "Invalid or expired link";
     }
+
+
+    const resetBtn = document.getElementById("resetBtn");
+const gotoBtn = document.getElementById("goto-site");
+const msg = document.getElementById("message");
+
+resetBtn.addEventListener("click", async () => {
+  const newPassword = document.getElementById("newPassword").value;
+
+  try {
+    await confirmPasswordReset(auth, oobCode, newPassword);
+    msg.textContent = "Password reset successful!";
+    
+    // Show the button
+    gotoBtn.style.display = "block";
+    
+  } catch (error) {
+    msg.textContent = error.message;
+  }
+});
+
+gotoBtn.addEventListener("click", () => {
+  window.location.href = "../index.html"; 
+});
+
   </script>
 </body>
 </html>
