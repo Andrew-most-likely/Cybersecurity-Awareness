@@ -23,7 +23,9 @@ section {
   margin-bottom: 4rem;
 }
 .card {
-  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1 1 400px;
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -33,11 +35,23 @@ section {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
+  ;
 }
 .card img {
   max-width: 100%;
   border-radius: var(--radius);
   object-fit: cover;
+}
+
+@media (max-width: 865px) {
+  /* Hide specific cards on small screens */
+  section:nth-of-type(1) .card:nth-child(2),
+  section:nth-of-type(2) .card:nth-child(1),
+  section:nth-of-type(3) .card:nth-child(2),
+  section:nth-of-type(4) .card:nth-child(1),
+  section:nth-of-type(5) .card:nth-child(2) {
+    display: none;
+  }
 }
 
 </style>
@@ -127,7 +141,6 @@ section {
   <li>Tips for safe online shopping, banking, and social media use.</li>
   <li>Strategies to maintain privacy and control over personal data.</li>
 </ul>
-<p>These skills help users feel confident, reducing the anxiety that often comes with navigating the digital world.</p>
     </div>
     <div class="card">
       <img src="Assets/About/Learn.png" alt="Educational Goals illustration">
