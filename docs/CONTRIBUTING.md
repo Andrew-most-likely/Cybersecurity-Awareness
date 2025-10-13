@@ -31,13 +31,11 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
 ---
 
 ## GitHub & Legal Transparency
-- [ ] **Custom Open License:**  
-  Create a `LICENSE.md` allowing free educational use, requiring attribution, and preventing commercial exploitation without permission.
-- [ ] **Privacy & Terms:**  
+- [X] **Privacy & Terms:**  
   Include standalone `privacy.html` and `terms.html` pages with clear language for all users.
-- [ ] **Policy Popup:**  
+- [X] **Policy Popup:**  
   Show a first-time modal to inform users about site policies, consent, and responsible use.
-- [ ] **Footer Integration:**  
+- [X] **Footer Integration:**  
   Always-visible links in the footer for Privacy, Terms, and License.
 
 ---
@@ -48,7 +46,7 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
 - [ ] **Personalized Learning Paths:**  
   Prompt users to choose their type of education: Everyday Safety, Student, Professional, or Instructor.  
   Use this to tailor content dynamically.
-- [ ] **Interactive Learning Hub:**  
+- [X] **Interactive Learning Hub:**  
   Develop a visually rich dashboard (`learn.html`) with:
   - Module cards with hover effects and icons  
   - Progress tracking bars  
