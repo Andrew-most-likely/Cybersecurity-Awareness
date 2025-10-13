@@ -69,9 +69,9 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
 ---
 
 ## Email & Notifications
-- [ ] **Reliable Emails:**  
+- ✅ **Reliable Emails:**  
   Configure SPF, DKIM, and DMARC to prevent spam issues.
-- [ ] **Onboarding Emails:**  
+- ✅ **Onboarding Emails:**  
   Send a warm welcome and guidance email to new users.
 - ✅ **Password Management:**  
   Implement a full **Forgot Password** and **Reset Password** flow for all users, with clear UI feedback.
