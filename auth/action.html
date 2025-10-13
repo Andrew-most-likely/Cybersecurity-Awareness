@@ -4,61 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Account Action - Cybersecurity Awareness</title>
-  <meta name="author" content="Andrew Cappelli" />
-  <meta name="description" content="Interactive cybersecurity dashboard with bite-sized lessons, quizzes, and tools to help you stay safe online." />
-  <meta name="theme-color" content="#5865f2" />
+  <title>Firebase Action - LearnCyberSafety</title>
   <link rel="icon" href="Assets/favicon.ico" type="image/x-icon" />
-
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap"></noscript>
-
   <link rel="stylesheet" href="../base-styles.css">
-
   <style>
-    .content-section {
-      max-width: 1200px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .content-section h3 {
-      margin-bottom: 1rem;
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
       display: flex;
-      align-items: center; 
-      justify-content: center; 
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
     }
-
-    .card.reset-card input {
+    .content-section {
+      max-width: 400px;
       width: 100%;
-      padding: 0.75rem;
-      margin: 0.5rem 0;
-      border-radius: 4px;
-      border: 1px solid var(--glass-border);
     }
-
-    .card.reset-card button {
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    h3 {
+      margin-bottom: 20px;
+    }
+    input {
       width: 100%;
-      padding: 0.75rem;
-      border-radius: 4px;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
       border: none;
-      background-color: var(--primary);
+      border-radius: 8px;
+      background: #5865f2;
       color: #fff;
       cursor: pointer;
+      margin-top: 10px;
     }
-
-    .card.reset-card p#message, .card p#verifyMessage {
-      margin-top: 0.5rem;
-      font-weight: 600;
-      text-align: center;
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    .muted {
+      color: #555;
+      margin-top: 10px;
+    }
+    #message,
+    #verifyMessage {
+      margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -66,106 +69,80 @@
   <section class="content-section">
     <h3 id="pageTitle">Loading...</h3>
     <div class="grid">
-      <!-- Password Reset Card -->
-  <section class="content-section">
-    <h3 id="pageTitle">Loading...</h3>
-    <div class="grid">
-      <!-- Password Reset Card -->
       <div class="card reset-card" id="resetCard" style="display:none">
-        <h4><i class="fas fa-lock"></i> Enter New Password</h4>
+        <h4>Enter New Password</h4>
         <input type="password" id="newPassword" placeholder="New password" required>
         <button id="resetBtn">Reset Password</button>
         <p id="message"></p>
-        <button id="goto-site" style="display:none; margin-top:10px;">Go to Dashboard</button>
+        <button id="gotoReset" style="display:none;">Go to Dashboard</button>
       </div>
-
-      <!-- Email Verification Card -->
       <div class="card" id="verifyCard" style="display:none">
         <h4>Thank you</h4>
         <p class="muted">Your email is verified. You may continue to the site.</p>
         <p id="verifyMessage"></p>
-        <button id="goto-site" style="display:none; margin-top:10px;">Go to Dashboard</button>
+        <button id="gotoVerify" style="display:none;">Go to Dashboard</button>
       </div>
     </div>
   </section>
-    </div>
-  </section>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCgHnpzIhUtno43U3fo6rL51I-OUvyKf3U",
-  authDomain: "learncybersafety.firebaseapp.com",
-  projectId: "learncybersafety",
-  storageBucket: "learncybersafety.firebasestorage.app",
-  messagingSenderId: "793441232155",
-  appId: "1:793441232155:web:32cbcaa870b173f1ee9fbe",
-  measurementId: "G-2LK0NYMBHP"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-const params = new URLSearchParams(window.location.search);
-const mode = params.get("mode"); // "resetPassword" or "verifyEmail"
-const oobCode = params.get("oobCode");
-
-const resetCard = document.getElementById("resetCard");
-const verifyCard = document.getElementById("verifyCard");
-const pageTitle = document.getElementById("pageTitle");
-
-// Password reset elements
-const resetBtn = document.getElementById("resetBtn");
-const msg = document.getElementById("message");
-const gotoReset = document.getElementById("gotoReset");
-
-// Email verification elements
-const verifyMessage = document.getElementById("verifyMessage");
-const gotoVerify = document.getElementById("gotoVerify");
-
-if (mode === "resetPassword") {
-  pageTitle.textContent = "Reset Password";
-  resetCard.style.display = "block";
-
-  resetBtn.addEventListener("click", async () => {
-    const newPassword = document.getElementById("newPassword").value;
-    try {
-      await confirmPasswordReset(auth, oobCode, newPassword);
-      msg.textContent = "Password reset successful!";
-      gotoReset.style.display = "block";
-    } catch (err) {
-      msg.textContent = err.message;
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCgHnpzIhUtno43U3fo6rL51I-OUvyKf3U",
+      authDomain: "learncybersafety.firebaseapp.com",
+      projectId: "learncybersafety",
+      storageBucket: "learncybersafety.firebasestorage.app",
+      messagingSenderId: "793441232155",
+      appId: "1:793441232155:web:32cbcaa870b173f1ee9fbe",
+      measurementId: "G-2LK0NYMBHP"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get("mode"); 
+    const oobCode = params.get("oobCode");
+    const resetCard = document.getElementById("resetCard");
+    const verifyCard = document.getElementById("verifyCard");
+    const pageTitle = document.getElementById("pageTitle");
+    const resetBtn = document.getElementById("resetBtn");
+    const msg = document.getElementById("message");
+    const gotoReset = document.getElementById("gotoReset");
+    const verifyMessage = document.getElementById("verifyMessage");
+    const gotoVerify = document.getElementById("gotoVerify");
+    if (mode === "resetPassword") {
+      pageTitle.textContent = "Reset Password";
+      resetCard.style.display = "block";
+      resetBtn.addEventListener("click", async () => {
+        const newPassword = document.getElementById("newPassword").value;
+        try {
+          await confirmPasswordReset(auth, oobCode, newPassword);
+          msg.textContent = "Password reset successful!";
+          gotoReset.style.display = "block";
+        } catch (err) {
+          msg.textContent = err.message;
+        }
+      });
+      gotoReset.addEventListener("click", () => {
+        window.location.href = "../index.html";
+      });
+    } else if (mode === "verifyEmail") {
+      pageTitle.textContent = "Email Verification";
+      verifyCard.style.display = "block";
+      (async () => {
+        try {
+          await applyActionCode(auth, oobCode);
+          verifyMessage.textContent = "Email verified successfully!";
+          gotoVerify.style.display = "block";
+        } catch (err) {
+          verifyMessage.textContent = "Error: " + err.message;
+        }
+      })();
+      gotoVerify.addEventListener("click", () => {
+        window.location.href = "../index.html";
+      });
+    } else {
+      pageTitle.textContent = "Invalid or expired link";
     }
-  });
-
-  gotoReset.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-
-} else if (mode === "verifyEmail") {
-  pageTitle.textContent = "Email Verification";
-  verifyCard.style.display = "block";
-
-  (async () => {
-    try {
-      await applyActionCode(auth, oobCode);
-      verifyMessage.textContent = "Email verified successfully!";
-      gotoVerify.style.display = "block";
-    } catch (err) {
-      verifyMessage.textContent = "Error: " + err.message;
-    }
-  })();
-
-  gotoVerify.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-
-} else {
-  pageTitle.textContent = "Invalid or expired link";
-}
-</script>
-
+  </script>
 </body>
 </html>
