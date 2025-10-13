@@ -10,58 +10,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../base-styles.css">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f4f4f4;
+    .content-section {
+      max-width: 1200px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .content-section h3 {
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      margin: 0;
     }
-    .content-section {
-      max-width: 400px;
+    .card.reset-card input {
       width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-radius: 4px;
+      border: 1px solid var(--glass-border);
     }
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    h3 {
-      margin-bottom: 20px;
-    }
-    input {
+    .card.reset-card button {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      padding: 10px 20px;
+      padding: 0.75rem;
+      border-radius: 4px;
       border: none;
-      border-radius: 8px;
-      background: #5865f2;
+      background-color: var(--primary);
       color: #fff;
       cursor: pointer;
-      margin-top: 10px;
     }
-    button:disabled {
-      background: #aaa;
-      cursor: not-allowed;
-    }
-    .muted {
-      color: #555;
-      margin-top: 10px;
-    }
-    #message,
-    #verifyMessage {
-      margin-top: 10px;
-      font-weight: bold;
+    .card.reset-card p#message,
+    .card p#verifyMessage {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      text-align: center;
     }
   </style>
 </head>
@@ -103,7 +85,6 @@
     const oobCode = params.get("oobCode");
     const resetCard = document.getElementById("resetCard");
     const verifyCard = document.getElementById("verifyCard");
-    const pageTitle = document.getElementById("pageTitle");
     const resetBtn = document.getElementById("resetBtn");
     const msg = document.getElementById("message");
     const gotoReset = document.getElementById("gotoReset");
