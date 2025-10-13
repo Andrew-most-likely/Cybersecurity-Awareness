@@ -67,6 +67,10 @@
     <h3 id="pageTitle">Loading...</h3>
     <div class="grid">
       <!-- Password Reset Card -->
+  <section class="content-section">
+    <h3 id="pageTitle">Loading...</h3>
+    <div class="grid">
+      <!-- Password Reset Card -->
       <div class="card reset-card" id="resetCard" style="display:none">
         <h4><i class="fas fa-lock"></i> Enter New Password</h4>
         <input type="password" id="newPassword" placeholder="New password" required>
@@ -79,93 +83,89 @@
       <div class="card" id="verifyCard" style="display:none">
         <h4>Thank you</h4>
         <p class="muted">Your email is verified. You may continue to the site.</p>
-        <a href="../index.html" class="btn mt-2">Go to site</a>
         <p id="verifyMessage"></p>
+        <button id="goto-site" style="display:none; margin-top:10px;">Go to Dashboard</button>
       </div>
     </div>
   </section>
+    </div>
+  </section>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCgHnpzIhUtno43U3fo6rL51I-OUvyKf3U",
-    authDomain: "learncybersafety.firebaseapp.com",
-    projectId: "learncybersafety",
-    storageBucket: "learncybersafety.firebasestorage.app",
-    messagingSenderId: "793441232155",
-    appId: "1:793441232155:web:32cbcaa870b173f1ee9fbe",
-    measurementId: "G-2LK0NYMBHP"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCgHnpzIhUtno43U3fo6rL51I-OUvyKf3U",
+  authDomain: "learncybersafety.firebaseapp.com",
+  projectId: "learncybersafety",
+  storageBucket: "learncybersafety.firebasestorage.app",
+  messagingSenderId: "793441232155",
+  appId: "1:793441232155:web:32cbcaa870b173f1ee9fbe",
+  measurementId: "G-2LK0NYMBHP"
+};
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    const params = new URLSearchParams(window.location.search);
-    const mode = params.get("mode"); // "resetPassword" or "verifyEmail"
-    const oobCode = params.get("oobCode");
+const params = new URLSearchParams(window.location.search);
+const mode = params.get("mode"); // "resetPassword" or "verifyEmail"
+const oobCode = params.get("oobCode");
 
-    const resetCard = document.getElementById("resetCard");
-    const verifyCard = document.getElementById("verifyCard");
-    const pageTitle = document.getElementById("pageTitle");
+const resetCard = document.getElementById("resetCard");
+const verifyCard = document.getElementById("verifyCard");
+const pageTitle = document.getElementById("pageTitle");
 
-    if (mode === "resetPassword") {
-      pageTitle.textContent = "Reset Password";
-      resetCard.style.display = "block";
-
-      document.getElementById("resetBtn").addEventListener("click", async () => {
-        const newPassword = document.getElementById("newPassword").value;
-        const msg = document.getElementById("message");
-
-        try {
-          await confirmPasswordReset(auth, oobCode, newPassword);
-          msg.textContent = "Password reset successful!";
-        } catch (err) {
-          msg.textContent = err.message;
-        }
-      });
-
-    } else if (mode === "verifyEmail") {
-      pageTitle.textContent = "Email Verification";
-      verifyCard.style.display = "block";
-      const verifyMessage = document.getElementById("verifyMessage");
-
-      try {
-        await applyActionCode(auth, oobCode);
-        verifyMessage.textContent = "Email verified successfully!";
-      } catch (err) {
-        verifyMessage.textContent = "Error: " + err.message;
-      }
-
-    } else {
-      pageTitle.textContent = "Invalid or expired link";
-    }
-
-
-    const resetBtn = document.getElementById("resetBtn");
-const gotoBtn = document.getElementById("goto-site");
+// Password reset elements
+const resetBtn = document.getElementById("resetBtn");
 const msg = document.getElementById("message");
+const gotoReset = document.getElementById("gotoReset");
 
-resetBtn.addEventListener("click", async () => {
-  const newPassword = document.getElementById("newPassword").value;
+// Email verification elements
+const verifyMessage = document.getElementById("verifyMessage");
+const gotoVerify = document.getElementById("gotoVerify");
 
-  try {
-    await confirmPasswordReset(auth, oobCode, newPassword);
-    msg.textContent = "Password reset successful!";
-    
-    // Show the button
-    gotoBtn.style.display = "block";
-    
-  } catch (error) {
-    msg.textContent = error.message;
-  }
-});
+if (mode === "resetPassword") {
+  pageTitle.textContent = "Reset Password";
+  resetCard.style.display = "block";
 
-gotoBtn.addEventListener("click", () => {
-  window.location.href = "../index.html"; 
-});
+  resetBtn.addEventListener("click", async () => {
+    const newPassword = document.getElementById("newPassword").value;
+    try {
+      await confirmPasswordReset(auth, oobCode, newPassword);
+      msg.textContent = "Password reset successful!";
+      gotoReset.style.display = "block";
+    } catch (err) {
+      msg.textContent = err.message;
+    }
+  });
 
-  </script>
+  gotoReset.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+
+} else if (mode === "verifyEmail") {
+  pageTitle.textContent = "Email Verification";
+  verifyCard.style.display = "block";
+
+  (async () => {
+    try {
+      await applyActionCode(auth, oobCode);
+      verifyMessage.textContent = "Email verified successfully!";
+      gotoVerify.style.display = "block";
+    } catch (err) {
+      verifyMessage.textContent = "Error: " + err.message;
+    }
+  })();
+
+  gotoVerify.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+
+} else {
+  pageTitle.textContent = "Invalid or expired link";
+}
+</script>
+
 </body>
 </html>
