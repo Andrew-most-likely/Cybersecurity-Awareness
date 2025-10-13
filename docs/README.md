@@ -38,17 +38,6 @@ Follow the 3-2-1 backup rule to ensure you never lose critical files to hardware
 
 ---
 
-## How It Works
-
-**Learn → Practice → Earn → Verify**
-
-1. **Learn** - Complete interactive modules with real-world explanations and examples
-2. **Practice** - Test your knowledge with quizzes and hands-on security simulators
-3. **Earn** - Unlock badges and track your progress through your learning journey
-4. **Verify** - Export your learning record to prove what you've accomplished
-
----
-
 ## Interactive Tools & Features
 
 **Password Strength Tester**
@@ -74,20 +63,6 @@ Download your progress as a clean JSON file for verification, sharing, or your o
 
 **Cloud Sync**
 Your learning follows you across devices. Start on desktop, continue on mobile automatically synced.
-
----
-
-## Who This Is For
-
-**Students** wanting to understand digital security from the ground up
-
-**Parents** learning how to protect themselves and their families online
-
-**Professionals** building security awareness in their organizations
-
-**Everyone** who uses the internet and wants to reduce their risk
-
-No prerequisites. No assumptions. Just practical security for real people.
 
 ---
 
@@ -177,12 +152,6 @@ npx http-server
 - Mobile applications (iOS/Android)
 - Offline mode for learning anywhere
 - Instructor tools for educators and trainers
-
----
-
-## Security & Privacy
-
-**Your data is secure.** All authentication goes through Firebase. User information is encrypted in transit and at rest. We don't sell personal data or share it with third parties. See the Privacy Policy on the site for full details.
 
 ---
 
