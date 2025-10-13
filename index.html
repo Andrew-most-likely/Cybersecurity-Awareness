@@ -75,6 +75,9 @@
         <div class="title"></div>
       </div>
       <div class="controls" role="navigation" aria-label="Primary controls">
+        <button class="ghost" id="loginBtn">
+          Login
+        </button>
         <button style="display: none" id="themeToggle" class="btn" title="Toggle theme"
           aria-label="Toggle dark/light theme">
           Toggle theme</button><button style="display: none" id="downloadCert" class="ghost"
@@ -110,7 +113,7 @@
             <a href="#achievements" class="achievements" data-section="achievements"><i class="fas fa-trophy"></i> Achievements</a>
           </li>
           <li>
-            <a href="#progress" class="progress" data-section="progress"><i class="fas fa-chart-bar"></i> Progress</a>
+            <a href="#progress" class="achievements" data-section="progress"><i class="fas fa-chart-bar"></i> Progress</a>
           </li>
         </ul>
       </nav>
@@ -166,6 +169,7 @@
           </p>
           <div id="progressContainer" style="margin-top: 18px"></div>
         </section>
+        <div class="overlay">Login to Learn</div>
       </div>
       <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
     </main>

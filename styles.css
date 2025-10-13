@@ -113,7 +113,7 @@ header.site {
   background: transparent;
   border: 1px solid var(--glass-border);
   color: var(--text);
-  padding: 8px 12px;
+  padding: 15px 12px;
   border-radius: 10px;
   transition: all 0.2s;
   cursor: pointer;
@@ -211,6 +211,33 @@ nav.sidebar a.active {
   backdrop-filter: blur(var(--glass-blur));
   min-height: 500px;
 }
+
+
+.main-card.hidden .section-content {
+  filter: blur(2px) brightness(0.7); /* blur and dim content */
+  pointer-events: none;               /* disable clicks on content */
+}
+
+.main-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;                     /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background: rgba(20, 20, 20, 0.5);      /* semi-transparent glue effect */
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 12px;
+  pointer-events: all;
+}
+
 .modules-grid {
   display: grid;
   gap: 16px;

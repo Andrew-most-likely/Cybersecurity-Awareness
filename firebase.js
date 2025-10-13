@@ -155,6 +155,9 @@ window.addEventListener('beforeunload', saveProgressToFirebase);
 function updateHeaderWithUser(user) {
   const controls = document.querySelector('.controls');
   
+  if (loginBtn) {
+  loginBtn.remove();
+}
   // Add user info and sign out button at the beginning
   const userInfoHTML = `
     <div style="display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
@@ -226,5 +229,37 @@ document.querySelectorAll('button.ghost,button.btn , a.module-link').forEach(but
 });
 
 document.querySelectorAll('a.active, a.quizzes, a.achievements, a.progress').forEach(link => {
-  link.addEventListener('click', requireAuthRedirect);
+//  link.addEventListener('click', requireAuthRedirect);
+});
+
+const loginURL = 'login.html';
+
+// Sections to hide
+const idsToHide = [
+  'modulesSection',
+  'quizzesSection',
+  'toolsSection',
+  'achievementsSection',
+  'progressSection'
+];
+
+function updateHiddenElements(user) {
+  const mainCard = document.querySelector('.main-card');
+  const overlay = mainCard.querySelector('.overlay');
+
+  if (user) {
+    mainCard.classList.remove('hidden');
+    if (overlay) overlay.style.display = 'none';
+  } else {
+    mainCard.classList.add('hidden');
+    if (overlay) {
+      overlay.style.display = 'flex';
+      overlay.onclick = () => window.location.href = loginURL; // redirect to login
+    }
+  }
+}
+
+// Listen for Firebase auth state
+auth.onAuthStateChanged(user => {
+  updateHiddenElements(user);
 });
