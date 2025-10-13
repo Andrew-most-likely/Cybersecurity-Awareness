@@ -759,11 +759,11 @@ function renderModules() {
       mod.title
     )}</h3><p>${escapeHtml(
       mod.description
-    )}</p></div></div><div class="module-footer"><div class="progress-row" style="margin-top:12px;display:flex;align-items:center;gap:8px;"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Module progress ${p}%"><div class="progress-fill" style="width:${p}%;"></div></div><div class="progress-text">${p}%</div></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="ghost" data-open="${
+    )}</p></div></div><div class="module-footer"><div class="progress-row" style="margin-top:12px;display:flex;align-items:center;gap:8px;"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Module progress ${p}%"><div class="progress-fill" style="width:${p}%;"></div></div><div class="progress-text">${p}%</div></div><div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between;"><button class="ghost" data-open="${
       mod.id
     }" aria-label="View ${
       mod.title
-    } details">View Details</button><button class="btn" data-complete="${
+    } details">Start Lesson</button><button class="btn" data-complete="${
       mod.id
     }" ${isComplete ? "disabled" : ""} aria-label="${
       isComplete ? "Module completed" : "Mark module complete"

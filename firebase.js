@@ -208,21 +208,23 @@ window.firebaseAuth = {
   getCurrentUser: () => auth.currentUser
 };
 
-// Function to handle click and redirect if not logged in
 function requireAuthRedirect(e) {
   const user = auth.currentUser;
+  const target = e.currentTarget;
+
+  if (target.classList.contains('splash-button') || target.id === 'scrollTopBtn') {
+    return;
+  }
   if (!user) {
     e.preventDefault();
     window.location.href = 'login.html';
   }
 }
 
-// Attach to all buttons
-document.querySelectorAll('button').forEach(button => {
+document.querySelectorAll('button.ghost,button.btn , a.module-link').forEach(button => {
   button.addEventListener('click', requireAuthRedirect);
 });
 
-// Attach to all links
-document.querySelectorAll('a').forEach(link => {
+document.querySelectorAll('a.active, a.quizzes, a.achievements, a.progress').forEach(link => {
   link.addEventListener('click', requireAuthRedirect);
 });
