@@ -31,22 +31,22 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
 ---
 
 ## GitHub & Legal Transparency
-- [X] **Privacy & Terms:**  
+- ✅ **Privacy & Terms:**  
   Include standalone `privacy.html` and `terms.html` pages with clear language for all users.
-- [X] **Policy Popup:**  
+- ✅ **Policy Popup:**  
   Show a first-time modal to inform users about site policies, consent, and responsible use.
-- [X] **Footer Integration:**  
+- ✅ **Footer Integration:**  
   Always-visible links in the footer for Privacy, Terms, and License.
 
 ---
 
 ## User Experience (UX)
-- [ ] **Open Exploration:**  
+- ✅ **Open Exploration:**  
   Let visitors browse lessons, previews, and modules without signing in, building trust and accessibility.
 - [ ] **Personalized Learning Paths:**  
   Prompt users to choose their type of education: Everyday Safety, Student, Professional, or Instructor.  
   Use this to tailor content dynamically.
-- [X] **Interactive Learning Hub:**  
+- ✅ **Interactive Learning Hub:**  
   Develop a visually rich dashboard (`learn.html`) with:
   - Module cards with hover effects and icons  
   - Progress tracking bars  
@@ -73,12 +73,14 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
   Configure SPF, DKIM, and DMARC to prevent spam issues.
 - [ ] **Onboarding Emails:**  
   Send a warm welcome and guidance email to new users.
-- [ ] **Password Management:**  
+- ✅ **Password Management:**  
   Implement a full **Forgot Password** and **Reset Password** flow for all users, with clear UI feedback.
 
 ---
 
 ## Mission Statement & About Us
+- ✅ **Create About Page:**
+  Create visualy cohesive page that will hold Mission Statement & About Us
 - [ ] **About Page:**  
   Clearly explain the purpose, vision, and educational goals of LearnCyberSafety.org.
 - [ ] **Mission Statement:**  
