@@ -81,11 +81,11 @@ This roadmap represents a vision for **LearnCyberSafety.org** to become a fully 
 ## Mission Statement & About Us
 - ✅ **Create About Page:**
   Create visualy cohesive page that will hold Mission Statement & About Us
-- [ ] **About Page:**  
+- ✅ **About Page:**  
   Clearly explain the purpose, vision, and educational goals of LearnCyberSafety.org.
-- [ ] **Mission Statement:**  
+- ✅ **Mission Statement:**  
   Provide accessible, practical, and free cybersecurity education to empower users to recognize and prevent online threats.
-- [ ] **Why We Exist:**  
+- ✅ **Why We Exist:**  
   Fill the gap in cybersecurity awareness by creating interactive, engaging, and open learning resources for students, professionals, and everyday internet users.
 
 ---
