@@ -1,6 +1,6 @@
 # LearnCyberSafety
 
-> Secure your digital world, free your real one.
+<img width="1916" height="905" alt="BG" src="https://github.com/user-attachments/assets/0c9351fa-68ea-46bf-93b7-7ee72426afdb" />
 
 An interactive cybersecurity awareness platform built for everyone no technical background required. Learn practical online safety through bite-sized lessons, hands-on tools, and real-world scenarios.
 
