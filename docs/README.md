@@ -123,7 +123,6 @@ npx http-server
 ├── about.html          About and mission
 ├── scripts.js          Core application logic
 ├── firebase.js         Firebase configuration
-├── base-styles.css     Design system and styles
 └── Assets/             Images and icons
 ```
 
