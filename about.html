@@ -1,294 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Andrew Cappelli">
-<meta name="description" content="LearnCyberSafety.org - Practical online tips to keep you safe from scams, phishing, and account hacks.">
-<link rel="icon" href="Assets/favicon.ico" type="image/x-icon" />
-<title>About Us | LearnCyberSafety.org</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Font Awesome Free -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Andrew Cappelli" />
+    <meta
+      name="description"
+      content="LearnCyberSafety.org - Practical online tips to keep you safe from scams, phishing, and account hacks."
+    />
+    <link rel="icon" href="Assets/favicon.ico" type="image/x-icon" />
+    <title>About Us | LearnCyberSafety.org</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome Free -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-<style>
-    /* 
+    <style>
+      /* 
    ABOUT PAGE - UNIQUE STYLES ONLY
 */
 
-/* LAYOUT */
-.main-content-wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+      /* LAYOUT */
+      .main-content-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-.page-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-    width: 100%;
-    flex: 1;
-}
+      .page-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+        width: 100%;
+        flex: 1;
+      }
 
-.layout {
-    max-width: 1200px;
-    margin: 4rem auto 0rem auto;
-    padding: 0 1rem;
-}
+      .layout {
+        max-width: 1200px;
+        margin: 4rem auto 0rem auto;
+        padding: 0 1rem;
+      }
 
-/* CARDS */
-.card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1 1 400px;
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    flex-direction: column;
-    transition: transform 0.3s ease;
-}
+      /* CARDS */
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 1 400px;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        flex-direction: column;
+        transition: transform 0.3s ease;
+      }
 
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-}
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      }
 
-.card img {
-    max-width: 100%;
-    border-radius: var(--radius);
-    object-fit: cover;
-}
-
-/* SECTIONS */
-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 4rem;
-}
-
-/* UTILITY CLASSES */
-.text-center {
-    text-align: center;
-}
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
-.mt-4 { margin-top: 2rem; }
-
-.mb-1 { margin-bottom: 0.5rem; }
-.mb-2 { margin-bottom: 1rem; }
-.mb-3 { margin-bottom: 1.5rem; }
-.mb-4 { margin-bottom: 2rem; }
-
-/* RESPONSIVE DESIGN - ABOUT SPECIFIC */
-@media (min-width: 768px) {
-    .headline {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 1024px) {
-    .page-container {
-        padding: 1.5rem 1rem;
-    }
-    
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-    h3 { font-size: 1.35rem; }
-}
-
-@media (max-width: 865px) {
-    /* Hide specific cards on small screens */
-    section:nth-of-type(1) .card:nth-child(2),
-    section:nth-of-type(2) .card:nth-child(1),
-    section:nth-of-type(3) .card:nth-child(2),
-    section:nth-of-type(4) .card:nth-child(1),
-    section:nth-of-type(5) .card:nth-child(2) {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .page-container {
-        padding: 1rem;
-    }
-    
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.25rem; }
-}
-
-@media (max-width: 480px) {
-    html {
-        font-size: 14px;
-    }
-    
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.35rem; }
-    h3 { font-size: 1.15rem; }
-}
-
-/* PRINT STYLES - ABOUT SPECIFIC */
-@media print {
-    .card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        break-inside: avoid;
-    }
-    
-    .page-container {
+      .card img {
         max-width: 100%;
-        padding: 0;
-    }
-}
-</style>
-</head>
-<body>
+        border-radius: var(--radius);
+        object-fit: cover;
+      }
 
-<!-- Splash Section -->
-<section class="splash">
+      /* SECTIONS */
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      /* UTILITY CLASSES */
+      .text-center {
+        text-align: center;
+      }
+
+      .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .mt-1 {
+        margin-top: 0.5rem;
+      }
+      .mt-2 {
+        margin-top: 1rem;
+      }
+      .mt-3 {
+        margin-top: 1.5rem;
+      }
+      .mt-4 {
+        margin-top: 2rem;
+      }
+
+      .mb-1 {
+        margin-bottom: 0.5rem;
+      }
+      .mb-2 {
+        margin-bottom: 1rem;
+      }
+      .mb-3 {
+        margin-bottom: 1.5rem;
+      }
+      .mb-4 {
+        margin-bottom: 2rem;
+      }
+
+      /* RESPONSIVE DESIGN - ABOUT SPECIFIC */
+      @media (min-width: 768px) {
+        .headline {
+          font-size: 4rem;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .page-container {
+          padding: 1.5rem 1rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1.75rem;
+        }
+        h3 {
+          font-size: 1.35rem;
+        }
+      }
+
+      @media (max-width: 865px) {
+        /* Hide specific cards on small screens */
+        section:nth-of-type(1) .card:nth-child(2),
+        section:nth-of-type(2) .card:nth-child(1),
+        section:nth-of-type(3) .card:nth-child(2),
+        section:nth-of-type(4) .card:nth-child(1),
+        section:nth-of-type(5) .card:nth-child(2) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .page-container {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 1.75rem;
+        }
+        h2 {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        html {
+          font-size: 14px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+        h2 {
+          font-size: 1.35rem;
+        }
+        h3 {
+          font-size: 1.15rem;
+        }
+      }
+
+      /* PRINT STYLES - ABOUT SPECIFIC */
+      @media print {
+        .card {
+          box-shadow: none;
+          border: 1px solid #ddd;
+          break-inside: avoid;
+        }
+
+        .page-container {
+          max-width: 100%;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Section -->
+    <section class="splash">
       <div class="splash-logo">
-    <img src="Assets/logo-White.webp" alt="Logo">
-  </div>    
-    <div class="splash-overlay">
+        <img src="Assets/logo-White.webp" alt="Logo" />
+      </div>
+      <div class="splash-overlay">
         <div class="splash-content">
-            <h1>Our <span class="highlight">mission</span> is to help you stay safe online with practical tips.</h1>
-            
-            <p class="splash-subtitle">Learn about out vision, where we came from, and why we think you should stay.</p>
-            
-            <div class="splash-cta-group">
-                <button onclick="window.location.href='index.html'" class="splash-btn splash-btn-primary">Back to Learn</button>
-                 <button  onclick="scrollToLearn()" href="#Start-Learning" class="splash-btn splash-btn-secondary">Read More</button> 
-            </div>
+          <h1>
+            Our <span class="highlight">mission</span> is to help you stay safe
+            online with practical tips.
+          </h1>
+
+          <p class="splash-subtitle">
+            Learn about out vision, where we came from, and why we think you
+            should stay.
+          </p>
+
+          <div class="splash-cta-group">
+            <button
+              onclick="window.location.href='index.html'"
+              class="splash-btn splash-btn-primary"
+            >
+              Back to Learn
+            </button>
+            <button
+              onclick="scrollToLearn()"
+              href="#Start-Learning"
+              class="splash-btn splash-btn-secondary"
+            >
+              Read More
+            </button>
+          </div>
         </div>
-    </div>
-</section>
-<main id="app" class="layout" role="main">
+      </div>
+    </section>
+    <main id="app" class="layout" role="main">
+      <section>
+        <div class="card">
+          <h2>Our Mission</h2>
+          <p>
+            At LearnCyberSafety.org, our mission is to empower individuals with
+            practical knowledge and actionable steps to protect themselves
+            online. We focus on delivering clear guidance on avoiding scams,
+            recognizing phishing attempts, and securing personal accounts, so
+            that anyone from beginners to seasoned internet users can navigate
+            the digital world confidently and safely.
+          </p>
 
-  <section>
-    <div class="card">
-      <h2>Our Mission</h2>
-      <p>At LearnCyberSafety.org, our mission is to empower individuals with practical knowledge and actionable steps to protect themselves online. We focus on delivering clear guidance on avoiding scams, recognizing phishing attempts, and securing personal accounts, so that anyone from beginners to seasoned internet users can navigate the digital world confidently and safely.</p>
-
-<p>We also emphasize real-world scenarios, demonstrating how cyber threats appear in emails, social media, and everyday web browsing. By teaching users to spot red flags before it's too late, we hope to reduce digital risk and give people peace of mind when interacting online.</p>
-    </div>
-    <div class="card">
-      <img src="Assets/About/mission.webp" alt="Mission illustration">
-    </div>
-  </section>
-
-  <section>
-    <div class="card">
-      <img src="Assets/About/why.webp" alt="Why we exist illustration">
-    </div>
-    <div class="card">
-      <h2>Why We Exist</h2>
-      <p>Cyber threats are constantly evolving, yet many people still fall victim to scams, hacks, and identity theft. We exist to bridge the gap between technical security knowledge and everyday online safety. Our goal is to make cybersecurity understandable and actionable for everyone.</p>
-
-<p>Through easy-to-follow guides, tips, and educational content, we help users identify common threats such as phishing emails, fake websites, and suspicious links. By increasing awareness, we aim to empower people to take proactive steps to protect their personal data, finances, and digital identities.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card">
-      <h2>Our Purpose</h2>
-<p>Our purpose is to simplify cybersecurity and make it actionable. Instead of overwhelming users with technical jargon, we provide step-by-step instructions, practical examples, and guidance that anyone can follow.</p>
-
-<p>We also aim to create habits that last. From strong password management to safe online browsing practices, our resources teach techniques that integrate seamlessly into daily life. Our goal is not just education it's building confidence and creating safer online communities.</p>
-    </div>
-    <div class="card">
-      <img src="Assets/About/purpose.webp" alt="Purpose illustration">
-    </div>
-  </section>
-
-  <section>
-    <div class="card">
-      <img src="Assets/About/vision.webp" alt="Vision illustration">
-    </div>
-    <div class="card">
-      <h2>Our Vision</h2>
-      <p>We envision a world where everyone can enjoy the benefits of the internet without fear. By educating users and fostering good digital habits, we hope to reduce online risk, promote informed decision-making, and cultivate a community of digitally savvy individuals.</p>
-
-<p>We believe that a safer internet starts with awareness. Through our resources, we hope to empower people to act confidently, share knowledge with others, and contribute to an online environment where threats are minimized and learning is continuous.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card">
-      <h2>What You'll Learn</h2>
-        <p>Visitors to LearnCyberSafety.org will gain the knowledge and skills to identify phishing emails, create strong passwords, secure accounts, and avoid common online traps. Our practical guides and tutorials equip users to take proactive steps in protecting their personal information, devices, and online presence.</p>
-
-<p>By following our lessons, you'll learn:</p>
-<ul>
-  <li>How to spot phishing and social engineering attempts.</li>
-  <li>Best practices for password management and account recovery.</li>
-  <li>Tips for safe online shopping, banking, and social media use.</li>
-  <li>Strategies to maintain privacy and control over personal data.</li>
-</ul>
-    </div>
-    <div class="card">
-      <img src="Assets/About/Learn.webp" alt="Educational Goals illustration">
-    </div>
-  </section>
-
-</main>
-<button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-
-
-<!-- Footer -->
-<div class="footer-div">
-  <ul class="footer-ul">
-    <li>
-      © 2025 Andrew Cappelli
-      • <a class="footer-a" data-modal="tos">Terms of Service</a> 
-      • <a class="footer-a" data-modal="privacy">Privacy Policy</a>
-      • <a target="_blank" class="footer-a" href="https://github.com/Andrew-most-likely/">Github</a>
-    </li>
-  </ul>
-</div>
-
-        <div id="footerModalOverlay" style="display:none;">
-            <div id="footerModalContent"> <span id="footerModalClose">&times;</span>
-                <h2 id="footerModalTitle"></h2>
-                <div id="footerModalText"></div>
-            </div>
+          <p>
+            We also emphasize real-world scenarios, demonstrating how cyber
+            threats appear in emails, social media, and everyday web browsing.
+            By teaching users to spot red flags before it's too late, we hope to
+            reduce digital risk and give people peace of mind when interacting
+            online.
+          </p>
         </div>
-        
-        <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
-            <div class="dialog" role="document"> <button class="close" aria-label="Close" id="modalClose"> &times;
-                </button>
-                <div id="modalContent"></div>
-            </div>
+        <div class="card">
+          <img src="Assets/About/mission.webp" alt="Mission illustration" />
         </div>
-        <script>
-// Footer modal functionality
-const footerModalOverlay = document.getElementById('footerModalOverlay');
-const footerModalTitle = document.getElementById('footerModalTitle');
-const footerModalText = document.getElementById('footerModalText');
-const footerModalClose = document.getElementById('footerModalClose');
+      </section>
 
-// Handle footer links
-document.querySelectorAll('a[data-modal]').forEach((link) => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const type = link.getAttribute('data-modal');
-    
-    if (type === 'tos') {
-      footerModalTitle.textContent = 'Terms of Service';
-      footerModalText.innerHTML = `
+      <section>
+        <div class="card">
+          <img src="Assets/About/why.webp" alt="Why we exist illustration" />
+        </div>
+        <div class="card">
+          <h2>Why We Exist</h2>
+          <p>
+            Cyber threats are constantly evolving, yet many people still fall
+            victim to scams, hacks, and identity theft. We exist to bridge the
+            gap between technical security knowledge and everyday online safety.
+            Our goal is to make cybersecurity understandable and actionable for
+            everyone.
+          </p>
+
+          <p>
+            Through easy-to-follow guides, tips, and educational content, we
+            help users identify common threats such as phishing emails, fake
+            websites, and suspicious links. By increasing awareness, we aim to
+            empower people to take proactive steps to protect their personal
+            data, finances, and digital identities.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <h2>Our Purpose</h2>
+          <p>
+            Our purpose is to simplify cybersecurity and make it actionable.
+            Instead of overwhelming users with technical jargon, we provide
+            step-by-step instructions, practical examples, and guidance that
+            anyone can follow.
+          </p>
+
+          <p>
+            We also aim to create habits that last. From strong password
+            management to safe online browsing practices, our resources teach
+            techniques that integrate seamlessly into daily life. Our goal is
+            not just education it's building confidence and creating safer
+            online communities.
+          </p>
+        </div>
+        <div class="card">
+          <img src="Assets/About/purpose.webp" alt="Purpose illustration" />
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <img src="Assets/About/vision.webp" alt="Vision illustration" />
+        </div>
+        <div class="card">
+          <h2>Our Vision</h2>
+          <p>
+            We envision a world where everyone can enjoy the benefits of the
+            internet without fear. By educating users and fostering good digital
+            habits, we hope to reduce online risk, promote informed
+            decision-making, and cultivate a community of digitally savvy
+            individuals.
+          </p>
+
+          <p>
+            We believe that a safer internet starts with awareness. Through our
+            resources, we hope to empower people to act confidently, share
+            knowledge with others, and contribute to an online environment where
+            threats are minimized and learning is continuous.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <h2>What You'll Learn</h2>
+          <p>
+            Visitors to LearnCyberSafety.org will gain the knowledge and skills
+            to identify phishing emails, create strong passwords, secure
+            accounts, and avoid common online traps. Our practical guides and
+            tutorials equip users to take proactive steps in protecting their
+            personal information, devices, and online presence.
+          </p>
+
+          <p>By following our lessons, you'll learn:</p>
+          <ul>
+            <li>How to spot phishing and social engineering attempts.</li>
+            <li>
+              Best practices for password management and account recovery.
+            </li>
+            <li>
+              Tips for safe online shopping, banking, and social media use.
+            </li>
+            <li>
+              Strategies to maintain privacy and control over personal data.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <img
+            src="Assets/About/Learn.webp"
+            alt="Educational Goals illustration"
+          />
+        </div>
+      </section>
+    </main>
+    <button id="scrollTopBtn" title="Go to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <div class="footer-div">
+      <ul class="footer-ul">
+        <li>
+          © 2025 Andrew Cappelli •
+          <a class="footer-a" data-modal="tos">Terms of Service</a> •
+          <a class="footer-a" data-modal="privacy">Privacy Policy</a> •
+          <a
+            target="_blank"
+            class="footer-a"
+            href="https://github.com/Andrew-most-likely/"
+            >Github</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div id="footerModalOverlay" style="display: none">
+      <div id="footerModalContent">
+        <span id="footerModalClose">&times;</span>
+        <h2 id="footerModalTitle"></h2>
+        <div id="footerModalText"></div>
+      </div>
+    </div>
+
+    <div
+      id="modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="dialog" role="document">
+        <button class="close" aria-label="Close" id="modalClose">
+          &times;
+        </button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+    <script>
+      // Footer modal functionality
+      const footerModalOverlay = document.getElementById("footerModalOverlay");
+      const footerModalTitle = document.getElementById("footerModalTitle");
+      const footerModalText = document.getElementById("footerModalText");
+      const footerModalClose = document.getElementById("footerModalClose");
+
+      // Handle footer links
+      document.querySelectorAll("a[data-modal]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const type = link.getAttribute("data-modal");
+
+          if (type === "tos") {
+            footerModalTitle.textContent = "Terms of Service";
+            footerModalText.innerHTML = `
         <h3>Effective Date: October 10, 2025</h3>
         <ol>
           <li><strong>Acceptance of Terms:</strong> By accessing or using LearnCyberSafety (the "Site"), you agree to be bound by these Terms of Service and all applicable laws.</li>
@@ -302,9 +437,9 @@ document.querySelectorAll('a[data-modal]').forEach((link) => {
           <li><strong>Contact:</strong> For questions, contact us at <a href="mailto:andrewcappelli13@gmail.com">andrewcappelli13@gmail.com</a>.</li>
         </ol>
       `;
-    } else if (type === 'privacy') {
-      footerModalTitle.textContent = 'Privacy Policy';
-      footerModalText.innerHTML = `
+          } else if (type === "privacy") {
+            footerModalTitle.textContent = "Privacy Policy";
+            footerModalText.innerHTML = `
         <h3>Effective Date: October 10, 2025</h3>
         <ol>
           <li><strong>Information We Collect:</strong> We may collect email addresses for accounts, anonymous usage data, and feedback or content you submit.</li>
@@ -317,40 +452,43 @@ document.querySelectorAll('a[data-modal]').forEach((link) => {
           <li><strong>Policy Updates:</strong> Updates may occur periodically. Continued use indicates acceptance.</li>
         </ol>
       `;
-    }
-    
-    footerModalOverlay.style.display = 'flex';
-  });
-});
+          }
 
-// Close modal when clicking X
-footerModalClose.addEventListener('click', () => {
-  footerModalOverlay.style.display = 'none';
-});
+          footerModalOverlay.style.display = "flex";
+        });
+      });
 
-// Close modal when clicking overlay background
-footerModalOverlay.addEventListener('click', (e) => {
-  if (e.target === footerModalOverlay) {
-    footerModalOverlay.style.display = 'none';
-  }
-});
+      // Close modal when clicking X
+      footerModalClose.addEventListener("click", () => {
+        footerModalOverlay.style.display = "none";
+      });
 
-// Scroll to top button
-const scrollBtn = document.getElementById('scrollTopBtn');
+      // Close modal when clicking overlay background
+      footerModalOverlay.addEventListener("click", (e) => {
+        if (e.target === footerModalOverlay) {
+          footerModalOverlay.style.display = "none";
+        }
+      });
 
-window.addEventListener('scroll', () => {
-  scrollBtn.style.display = (document.documentElement.scrollTop > 200 || document.body.scrollTop > 200) ? 'block' : 'none';
-});
+      // Scroll to top button
+      const scrollBtn = document.getElementById("scrollTopBtn");
 
-scrollBtn.addEventListener('click', () => {
-  document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+      window.addEventListener("scroll", () => {
+        scrollBtn.style.display =
+          document.documentElement.scrollTop > 200 ||
+          document.body.scrollTop > 200
+            ? "block"
+            : "none";
+      });
 
-// Smooth scroll function
-function scrollToLearn() {
-  document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
-}
-</script>
-</body>
+      scrollBtn.addEventListener("click", () => {
+        document.body.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
 
+      // Smooth scroll function
+      function scrollToLearn() {
+        document.getElementById("app").scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
 </html>
