@@ -203,30 +203,6 @@ nav.sidebar a.active {
     position: relative;
 }
 
-.main-card .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
-    background: rgba(20, 20, 20, 0.5);
-    cursor: pointer;
-    z-index: 10;
-    border-radius: 15px;
-    pointer-events: all;
-}
-
-.main-card.hidden .section-content {
-    filter: blur(2px) brightness(0.7);
-    pointer-events: none;
-}
 
 .section-content {
     display: none;
@@ -791,8 +767,8 @@ nav.sidebar a.active {
             <div class="brand">
                 <div class="title"></div>
             </div>
-            <div class="controls" role="navigation" aria-label="Primary controls"> <button class="ghost" id="loginBtn">
-                    Login </button> <button style="display: none" id="themeToggle" class="btn" title="Toggle theme"
+            <div class="controls" role="navigation" aria-label="Primary controls"> <button class="ghost" id="loginBtn" onclick="window.location.href='login.html'">
+                    Sign in to save progress </button> <button style="display: none" id="themeToggle" class="btn" title="Toggle theme"
                     aria-label="Toggle dark/light theme"> Toggle theme</button><button style="display: none"
                     id="downloadCert" class="ghost" title="Download Certificate" style="display: none"
                     aria-label="Download completion certificate"> Certificate</button><button style="display: none"
@@ -859,7 +835,6 @@ nav.sidebar a.active {
                     <p class="muted" style="margin-top: 6px"> Track your cybersecurity learning journey. </p>
                     <div id="progressContainer" style="margin-top: 18px"></div>
                 </section>
-                <div class="overlay">Login to Learn</div>
             </div> <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
         </main> <!-- Sign Out Confirmation Modal -->
         <div id="signOutModal"
