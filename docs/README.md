@@ -201,6 +201,3 @@ Built with Firebase for reliable infrastructure. Security guidance from NIST Cyb
 
 **The internet is safer when everyone knows how to protect themselves.** If you found this helpful, share it with someone who could benefit from learning these skills.
 
----
-
-**Questions?** Open an issue or reach out at andrewcappelli13@gmail.com
