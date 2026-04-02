@@ -1,0 +1,694 @@
+/* 
+   CSS VARIABLES
+*/
+:root {
+    --bg-main: linear-gradient(135deg, #2b2d31 0%, #1e1f22 100%);
+    --accent: #5865f2;
+    --accent-2: #4752c4;
+    --muted: #b5bac1;
+    --card-bg: rgba(43, 45, 49, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --text: #f2f3f5;
+    --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    --radius: 14px;
+    --glass-blur: 8px;
+    --success: #3ba55c;
+    --warning: #faa61a;
+    --danger: #ed4245;
+    --transition: all 0.3s ease;
+}
+
+/* 
+   RESET & BASE STYLES
+*/
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: var(--text);
+    background: #2b2d31;
+    scrollbar-width: none;
+}
+
+/* Scrollbar Styling */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Focus Styles */
+*:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 
+   TYPOGRAPHY
+*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 1rem 0;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+/* 
+   BUTTONS
+*/
+.btn {
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.18);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.ghost,
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    padding: 15px 12px;
+    border-radius: 10px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.ghost:hover,
+.btn-ghost:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.modal-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.modal-btn.primary-btn {
+    background: var(--accent);
+    color: #fff;
+}
+
+.modal-btn.primary-btn:hover {
+    background: var(--accent-2);
+    transform: translateY(-2px);
+}
+
+.modal-btn.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.modal-btn.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+#scrollTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+    background-color: #5865f2;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 12px 16px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, opacity 0.3s;
+    opacity: 0.7;
+    display: none;
+}
+
+#scrollTopBtn:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: white;
+    font-weight: 700;
+    font-family: Poppins, Inter;
+    box-shadow: var(--shadow);
+}
+
+/* 
+   SPLASH SCREEN
+*/
+.splash {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("Assets/Splash.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.splash-content {
+    max-width: 900px;
+    animation: fadeIn 1s ease-out;
+    z-index: 2;
+}
+
+.splash-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.splash-content h1 .highlight {
+    color: #5865f2;
+}
+
+.splash-subtitle {
+    font-size: 18px;
+    color: #e0e0e0;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.splash-cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.splash-btn {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.splash-btn-primary {
+    background: #5865f2;
+    color: white;
+}
+
+.splash-btn-primary:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(88, 101, 242, 0.3);
+}
+
+.splash-btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.splash-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.splash-subtext {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 12px;
+}
+
+.splash-proof {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+}
+
+.splash-proof-item {
+    text-align: center;
+}
+
+.splash-proof-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #5865f2;
+}
+
+.splash-proof-text {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 4px;
+}
+
+.splash-logo {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    z-index: 10;
+}
+
+.splash-logo img {
+    width: auto;
+}
+
+/* 
+   MODAL
+*/
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.45));
+    backdrop-filter: blur(4px);
+}
+
+.modal[aria-hidden="false"] {
+    display: flex;
+    animation: fadeIn 0.2s;
+}
+
+.dialog {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    width: 100%;
+    max-width: 880px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    animation: slideUp 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.dialog .close {
+    float: right;
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.dialog .close:hover {
+    color: var(--text);
+}
+
+/* 
+   FOOTER
+*/
+.footer-div {
+    width: 100%;
+    display: flex;
+    height: 10vh;
+    margin-top: 40px;
+    color: var(--muted);
+    line-height: 1.3;
+    font-family: Menlo, monospace;
+}
+
+.footer-ul {
+    display: inline-grid;
+    grid-auto-flow: row;
+    grid-gap: 24px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+}
+
+.footer-a {
+    color: var(--muted);
+}
+
+#footerModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#footerModalContent {
+    background: rgba(43, 45, 49);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 25px 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+#footerModalClose {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--accent);
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+
+#footerModalClose:hover {
+    color: var(--accent-2);
+}
+
+#footerModalContent h2 {
+    margin-top: 0;
+    color: var(--accent);
+}
+
+#footerModalContent a {
+    color: var(--accent-2);
+}
+
+#footerModalContent a:hover {
+    text-decoration: underline;
+}
+
+/* 
+   UTILITY CLASSES
+*/
+.muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.highlight {
+    color: var(--accent);
+}
+
+/* 
+   LOADING STATES
+*/
+.skeleton {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+    border-radius: 8px;
+}
+
+.spinner {
+    border: 3px solid var(--glass-border);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.8s linear infinite;
+    margin: 20px auto;
+}
+
+/* 
+   ANIMATIONS
+*/
+@keyframes shimmer {
+    from {
+        background-position: 200% 0;
+    }
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 
+   RESPONSIVE DESIGN - SHARED
+*/
+@media (min-width: 500px) {
+    .footer-ul {
+        grid-auto-flow: column;
+        list-style: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .splash {
+        height: 100vh;
+        padding: 1rem;
+    }
+
+    .splash-overlay {
+        padding: 1.5rem;
+    }
+
+    .splash-content {
+        max-width: 600px;
+    }
+
+    .splash-btn {
+        padding: 0.85rem 1.8rem;
+        font-size: 1.2rem;
+    }
+
+    .splash-logo img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-a:nth-child(n + 2) {
+        display: none;
+    }
+    
+    .splash-content h1 {
+        font-size: 32px;
+    }
+
+    .splash-subtitle {
+        font-size: 16px;
+    }
+
+    .splash-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    .splash-proof {
+        gap: 20px;
+    }
+
+    .splash-proof-number {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 640px) {
+    .splash {
+        background-position: left center;
+        height: 100vh;
+        padding: 0.75rem;
+    }
+
+    .splash-overlay {
+        padding: 1rem;
+    }
+
+    .splash-content {
+        max-width: 90%;
+    }
+
+    .splash-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+
+    .splash-cta-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .splash-btn {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .splash-logo img {
+        height: 180px;
+    }
+}
+
+/* 
+   PRINT STYLES
+*/
+@media print {
+    .controls,
+    nav.sidebar,
+    .btn,
+    .ghost,
+    footer {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+}

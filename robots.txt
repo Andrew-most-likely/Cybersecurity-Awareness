@@ -1,0 +1,6 @@
+# robots.txt for learncybersafety.org
+
+User-agent: *
+Disallow:
+
+Sitemap: https://learncybersafety.org/sitemap.xml
